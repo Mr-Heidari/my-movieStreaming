@@ -1,8 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
+import { topbarLinks } from "@/constants/topbarlinks";
 
 const TopBar = () => {
+  const { pathname } = useLocation();
+
   return (
     <>
       <main className=" top-contianer">
@@ -17,19 +20,25 @@ const TopBar = () => {
           </section>
 
           <section>
-            <nav className=" flex flex-row gap-4">
-              <Link to={"/"} className="topbar-links">
-                HOME
-              </Link>
-              <Link to={"/movies"} className="topbar-links">
-                MOVIES
-              </Link>
-              <Link to={"/tvseries"} className="topbar-links">
-                TVSERIES
-              </Link>
-              <Link to={"/about"} className="topbar-links">
-                ABOUT
-              </Link>
+            <nav className="">
+              <ul className=" flex flex-row gap-4">
+                {topbarLinks.map((link) => {
+                  const isActive = pathname === link.route;
+                  return (
+                    <Link
+                      to={link.route}
+                      className={
+                        "topbar-links" +
+                        (isActive
+                          ? " border-white bg-white/20"
+                          : " border-white/30 hover:bg-white/10")
+                      }
+                    >
+                      {link.label}
+                    </Link>
+                  );
+                })}
+              </ul>
             </nav>
           </section>
         </div>
