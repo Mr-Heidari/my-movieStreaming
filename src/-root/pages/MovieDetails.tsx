@@ -43,7 +43,7 @@ const MovieDetails = () => {
               className="md:w-[400px] max-md:w-[240px] max-sm:min-w-[110px] max-sm:w-[110px] h-full z-10 border-2 border-white/30 rounded-sm"
             />
           </section>
-          <section className="flex flex-col gap-1 sm:gap-5 justify-center text-white w-full max-sm:min-w-[85%] max-md:scale-[65%] max-md:-translate-x-[10%] ">
+          <section className="flex flex-col gap-1 sm:gap-5 justify-center text-white w-full max-sm:min-w-[85%] max-sm:scale-[73%] max-md:scale-[65%] max-md:-translate-x-[10%] ">
             <div>
               <h1 className="text-4xl font-bold flex flex-row gap-2 max-sm:text-xl">
                 {movieDetaile?.original_title}{" "}
