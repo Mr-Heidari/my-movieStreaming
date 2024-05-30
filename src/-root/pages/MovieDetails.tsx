@@ -50,7 +50,7 @@ const MovieDetails = () => {
     <div className="pt-28">
       <header className="">
         <div
-          className={`w-full md:h-[500px] h-[300px]  flex flex-row p-2 sm:p-5 lg:px-20 sm:px-5 relative ${
+          className={`w-full md:h-[500px] h-[250px]  flex flex-row p-2 sm:p-5 lg:px-20 sm:px-5 relative ${
             isDetailLoading ? "bg-neutral-800" : "bg-black/50"
           }  overflow-hidden gap-0 sm:gap-5 border-y-2 border-white/30`}
         >
@@ -73,13 +73,13 @@ const MovieDetails = () => {
                   <img
                     src={`https://image.tmdb.org/t/p/w500${movieDetaile?.poster_path}`}
                     alt=""
-                    className="md:w-[400px] max-md:w-[240px] max-sm:h-[250px] max-sm:min-w-[150px] max-sm:w-[150px] h-full z-10 border-2 border-white/30 rounded-sm"
+                    className="md:w-[400px] max-md:w-[240px] max-sm:h-[220px] max-sm:min-w-[120px] max-sm:w-[120px] h-full z-10 border-2 border-white/30 rounded-sm"
                   />
                 ) : (
                   <Skeleton className="md:w-[400px] items-center flex justify-center max-md:w-[240px] max-sm:min-w-[110px] max-sm:w-[110px] h-full bg-neutral-600 "></Skeleton>
                 )}
               </section>
-              <section className="flex flex-col gap-3 sm:gap-5 justify-center text-white w-full  max-sm:scale-[75%] max-md:scale-[65%] max-md:-translate-x-[10%] max-sm:-translate-x-[5%] ">
+              <section className="flex flex-col gap-3 sm:gap-5 justify-center text-white w-full  max-sm:scale-[73%] max-md:scale-[65%] max-md:-translate-x-[10%]  min-w-[80%]">
                 <div>
                   <h1 className="text-4xl font-bold flex flex-row gap-2 max-sm:text-xl">
                     {movieDetaile?.original_title}{" "}
@@ -171,7 +171,7 @@ const MovieDetails = () => {
                   <h2 className="text-2xl font-semibold max-sm:text-lg">
                     Overview
                   </h2>
-                  <p className="line-clamp-2 text-white/50 max-sm:text-sm">
+                  <p className="line-clamp-2 text-white/70 max-sm:text-sm">
                     {movieDetaile?.overview}
                   </p>
                 </div>
