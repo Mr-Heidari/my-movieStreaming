@@ -50,7 +50,7 @@ const MovieDetails = () => {
     <div className="pt-28">
       <header className="">
         <div
-          className={`w-full md:h-[500px] h-[300px] max-sm:h-[200px] flex flex-row p-2 sm:p-5 lg:px-20 sm:px-5 relative ${
+          className={`w-full md:h-[500px] h-[300px]  flex flex-row p-2 sm:p-5 lg:px-20 sm:px-5 relative ${
             isDetailLoading ? "bg-neutral-800" : "bg-black/50"
           }  overflow-hidden gap-0 sm:gap-5 border-y-2 border-white/30`}
         >
@@ -68,18 +68,18 @@ const MovieDetails = () => {
                 />
                 <div className=" absolute from-black bg-gradient-to-r top-0 z-20 w-full h-full"></div>
               </section>
-              <section>
+              <section className="flex items-center">
                 {!isDetailLoading ? (
                   <img
                     src={`https://image.tmdb.org/t/p/w500${movieDetaile?.poster_path}`}
                     alt=""
-                    className="md:w-[400px] max-md:w-[240px] max-sm:min-w-[110px] max-sm:w-[110px] h-full z-10 border-2 border-white/30 rounded-sm"
+                    className="md:w-[400px] max-md:w-[240px] max-sm:h-[250px] max-sm:min-w-[150px] max-sm:w-[150px] h-full z-10 border-2 border-white/30 rounded-sm"
                   />
                 ) : (
                   <Skeleton className="md:w-[400px] items-center flex justify-center max-md:w-[240px] max-sm:min-w-[110px] max-sm:w-[110px] h-full bg-neutral-600 "></Skeleton>
                 )}
               </section>
-              <section className="flex flex-col gap-1 sm:gap-5 justify-center text-white w-full max-sm:min-w-[85%] max-sm:scale-[73%] max-md:scale-[65%] max-md:-translate-x-[10%] ">
+              <section className="flex flex-col gap-3 sm:gap-5 justify-center text-white w-full  max-sm:scale-[75%] max-md:scale-[65%] max-md:-translate-x-[10%] max-sm:-translate-x-[5%] ">
                 <div>
                   <h1 className="text-4xl font-bold flex flex-row gap-2 max-sm:text-xl">
                     {movieDetaile?.original_title}{" "}
@@ -175,7 +175,7 @@ const MovieDetails = () => {
                     {movieDetaile?.overview}
                   </p>
                 </div>
-                <div className=" flex flex-row gap-10">
+                <div className=" flex flex-row gap-5 sm:gap-10">
                   { D_and_W?.map((members: { name: string; job: string }) => (
                     <div className=" flex flex-col ">
                       <p className="font-semibold max-sm:text-sm">
