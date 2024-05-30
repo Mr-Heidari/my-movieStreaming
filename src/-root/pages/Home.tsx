@@ -90,7 +90,7 @@ const Home = () => {
           <SuggestedMovieCard item={suggestedMovie} />
         </section>
         <section className="mt-5">
-          <CarouselPosterList items={inifinityItems?.flat(1)} title={"What's Popular"} isLoading={isPopulareLoading} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage}/>
+          <CarouselPosterList items={inifinityItems?.flat(1)} title={"What's Popular"} isLoading={isPopulareLoading} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} mediaType={'movie'}/>
         </section>
       </main>
     </div>

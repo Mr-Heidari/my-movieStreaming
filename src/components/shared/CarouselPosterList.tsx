@@ -31,6 +31,7 @@ type props = {
     options?: FetchNextPageOptions | undefined
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ) => Promise<InfiniteQueryObserverResult<InfiniteData<any, unknown>, Error>>;
+  mediaType?:string
 };
 
 const CarouselPosterList = ({
@@ -39,6 +40,7 @@ const CarouselPosterList = ({
   isLoading,
   hasNextPage,
   fetchNextPage,
+  mediaType
 }: props) => {
   const { ref, inView } = useInView();
 
@@ -69,7 +71,7 @@ const CarouselPosterList = ({
                 {items &&
                   (items.results !== undefined ? items.results : items).map(
                     (card: Media) => (
-                      <Link to={card.media_type ==='movie'?  `/movie/${card?.id}`: `/series/${card?.id}`}>
+                      <Link to={mediaType? `/${mediaType}/${card?.id}` : card.media_type ==='movie'?  `/movie/${card?.id}`: `/tv/${card?.id}`}>
                         <CarouselItem
                           onClick={() => console.log(items)}
                           key={card?.id}
