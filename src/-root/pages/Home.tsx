@@ -16,7 +16,7 @@ const Home = () => {
   const { data: allTrendings, isPending: isTrendingLoading } =
     useGetAllDayTrendings();
 
-  const { data: suggestedMovie, isPending: isSuggestedLoading } =
+  const { data: suggestedMovie, } =
     useGetAllWeekTrendings();
 
   const { data: popul, fetchNextPage ,hasNextPage ,isLoading:isPopulareLoading} = useGetInifinityPopulareMovies();
@@ -26,9 +26,13 @@ const Home = () => {
     for(let i=0 ; i<popul?.pages.length ;i++){
       if(!inifinityItems){
         console.log(inifinityItems)
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore: Unreachable code error
         setInifinityItems([popul?.pages[i]?.results])
       }else{
         console.log(inifinityItems)
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore: Unreachable code error
         setInifinityItems([...inifinityItems, popul?.pages[i]?.results])
       }
   
