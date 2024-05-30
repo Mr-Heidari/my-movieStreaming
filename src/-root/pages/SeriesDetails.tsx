@@ -1,6 +1,5 @@
 import {
-  useGetMovieById,
-  useGetMovieDirectorAndWriter,
+  useGetSeriesById,
 } from "@/lib/react-query/queries";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { useParams } from "react-router-dom";
@@ -31,17 +30,15 @@ const Loading = () => {
   );
 };
 
-const MovieDetails = () => {
+const SeriesDetaile = () => {
   const { id } = useParams();
 
-  const { data: movieDetaile, isLoading: isDetailLoading } = useGetMovieById({
+  const { data: seriesDetails, isLoading: isDetailLoading } = useGetSeriesById({
     id: id || "",
   });
 
-  const { data: D_and_W } = useGetMovieDirectorAndWriter({ id: id || "" });
-
   const getGenres = () => {
-    return movieDetaile?.genres?.map((genre) => {
+    return seriesDetails?.genres?.map((genre) => {
       return genre.name;
     });
   };
@@ -62,7 +59,7 @@ const MovieDetails = () => {
             <>
               <section className=" absolute top-0 right-0  -z-10  w-full h-[120%]  ">
                 <img
-                  src={`https://image.tmdb.org/t/p/w500${movieDetaile?.poster_path}`}
+                  src={`https://image.tmdb.org/t/p/w500${seriesDetails?.poster_path}`}
                   alt=""
                   className=" object-fill blur-md w-full h-full"
                 />
@@ -71,7 +68,7 @@ const MovieDetails = () => {
               <section>
                 {!isDetailLoading ? (
                   <img
-                    src={`https://image.tmdb.org/t/p/w500${movieDetaile?.poster_path}`}
+                    src={`https://image.tmdb.org/t/p/w500${seriesDetails?.poster_path}`}
                     alt=""
                     className="md:w-[400px] max-md:w-[240px] max-sm:min-w-[110px] max-sm:w-[110px] h-full z-10 border-2 border-white/30 rounded-sm"
                   />
@@ -82,21 +79,21 @@ const MovieDetails = () => {
               <section className="flex flex-col gap-1 sm:gap-5 justify-center text-white w-full max-sm:min-w-[85%] max-sm:scale-[73%] max-md:scale-[65%] max-md:-translate-x-[10%] ">
                 <div>
                   <h1 className="text-4xl font-bold flex flex-row gap-2 max-sm:text-xl">
-                    {movieDetaile?.original_title}{" "}
-                    <p className="text-white/50">{`(${movieDetaile?.release_date?.slice(
+                    {seriesDetails?.original_name}{" "}
+                    <p className="text-white/50">{`(${seriesDetails?.first_air_date?.slice(
                       0,
                       4
                     )})`}</p>
                   </h1>
                   <p className="text-white/80 max-sm:text-xs">
-                    {movieDetaile?.release_date} <strong>&middot;</strong>{" "}
-                    {getGenres()?.join(" , ")} {movieDetaile?.runtime}m
+                    {seriesDetails?.first_air_date} <strong>&middot;</strong>{" "}
+                    {getGenres()?.join(" , ")}
                   </p>
                 </div>
                 <div className="text-white flex flex-row items-center gap-2 ">
                   <div className="w-16 h-16 max-sm:w-12 max-sm:h-12">
                     <CircularProgressbar
-                      value={movieDetaile?.vote_average || 0}
+                      value={seriesDetails?.vote_average || 0}
                       styles={buildStyles({
                         rotation: 0,
 
@@ -114,13 +111,13 @@ const MovieDetails = () => {
                       strokeWidth={8}
                       maxValue={10}
                       text={
-                        movieDetaile
+                        seriesDetails
                           ? `${
                               parseFloat(
-                                movieDetaile?.vote_average?.toFixed(1)
+                                seriesDetails?.vote_average?.toFixed(1)
                               ) * 10
                             }
-            `
+              `
                           : "0"
                       }
                       background={true}
@@ -172,20 +169,18 @@ const MovieDetails = () => {
                     Overview
                   </h2>
                   <p className="line-clamp-2 text-white/50 max-sm:text-sm">
-                    {movieDetaile?.overview}
+                    {seriesDetails?.overview}
                   </p>
                 </div>
                 <div className=" flex flex-row gap-10">
-                  { D_and_W?.map((members: { name: string; job: string }) => (
-                    <div className=" flex flex-col ">
-                      <p className="font-semibold max-sm:text-sm">
-                        {members?.name}
-                      </p>
-                      <p className=" text-white/50 text-sm max-sm:text-xs">
-                        {members?.job}
-                      </p>
-                    </div>
-                  ))}
+                  <div className=" flex flex-col ">
+                    <p className="font-semibold max-sm:text-sm">
+                      {seriesDetails?.created_by[0]?.name}
+                    </p>
+                    <p className=" text-white/50 text-sm max-sm:text-xs">
+                      Creator
+                    </p>
+                  </div>
                 </div>
               </section>
             </>
@@ -196,4 +191,4 @@ const MovieDetails = () => {
   );
 };
 
-export default MovieDetails;
+export default SeriesDetaile;

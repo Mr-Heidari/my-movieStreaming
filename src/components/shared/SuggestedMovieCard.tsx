@@ -22,7 +22,7 @@ const SuggestedMovieCard = ({ item }: prop) => {
         <img
           src={`https://image.tmdb.org/t/p/w500${item?.results[0].poster_path}`}
           alt=""
-          className=" min-w-[140px] w-[140px] min-h-[210px]   md:min-w-[195px] md:h-full object-cover border-2 border-r-4 border-black/70"
+          className=" min-w-[140px] w-[140px] min-h-[210px]   md:min-w-[195px] md:h-full object-cover "
         />
       </section>
       {/* <div className="w-[4px] my-2 bg-black/70"></div> */}

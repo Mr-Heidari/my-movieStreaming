@@ -6,5 +6,7 @@ export enum QUERY_KEYS {
     GET_MOVIE_BY_ID = "getMoviebyId",
     GET_MOVIE_RELEASE_BY_ID = "getMovieReleaseDatebyId",
     GET_MOVIE_DIRECTOR_WRITER = "getDirector&Writer",
+    GET_SERIES_BY_ID="getSeriesbyId",
+    GET_Series_Creator="getSeriesCreator"
   }
   

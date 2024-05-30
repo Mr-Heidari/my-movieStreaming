@@ -101,10 +101,12 @@ export async function getMovieDirectorAndWriter(id: string) {
       .then((response) => response.json())
       .then((jsonData) =>
         [
-          jsonData.crew.filter(
+          jsonData?.crew?.filter(
             ({ job }: { job: string }) => job === "Director"
           ),
-          jsonData.crew.filter(({ job }: { job: string }) => job === "Writer"),
+          jsonData?.crew?.filter(
+            ({ job }: { job: string }) => job === "Writer"
+          ),
         ].flat(1)
       );
     console.log(realese);
@@ -115,3 +117,19 @@ export async function getMovieDirectorAndWriter(id: string) {
     console.log(error);
   }
 }
+
+export async function getSerieById(id: string) {
+  try {
+    const series = await fetch(
+      `https://api.themoviedb.org/3/tv/${id}?language=en-US`,
+      options
+    ).then((response) => response.json());
+
+    if (!series) throw Error;
+
+    return series;
+  } catch (error) {
+    console.log(error);
+  }
+}
+

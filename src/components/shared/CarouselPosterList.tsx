@@ -1,4 +1,4 @@
-import { Movie } from "@/types";
+import { Media } from "@/types";
 import {
   Carousel,
   CarouselContent,
@@ -68,8 +68,8 @@ const CarouselPosterList = ({
               <CarouselContent className=" gap-2  relative ">
                 {items &&
                   (items.results !== undefined ? items.results : items).map(
-                    (card: Movie) => (
-                      <Link to={`/movie/${card?.id}`}>
+                    (card: Media) => (
+                      <Link to={card.media_type ==='movie'?  `/movie/${card?.id}`: `/series/${card?.id}`}>
                         <CarouselItem
                           onClick={() => console.log(items)}
                           key={card?.id}
