@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import TopBar from "./components/TopBar";
+import BottomBar from "./components/BottomBar";
 
 const RootLayout = () => {
   return (
@@ -8,6 +9,7 @@ const RootLayout = () => {
       <section>
         <Outlet />
       </section>
+      <BottomBar/>
     </main>
   );
 };

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Animated gradient -->
+  <defs>
+    <linearGradient id="myGradient" gradientTransform="rotate(20)">
+      <stop offset="5%"  stop-color="#eee">
+        <animate attributeName="stop-color" values="#EEEEEE; #CCCCCC; #EEEEEE" dur="2s" repeatCount="indefinite"></animate>
+      </stop>
+      <stop offset="95%" stop-color="#aaa">
+        <animate attributeName="stop-color" values="#EEEEEE; #DDDDDD; #EEEEEE" dur="3s" repeatCount="indefinite"></animate>
+      </stop>
+    </linearGradient>
+  </defs>
+
+  <!-- Shapes -->
+  <rect fill="url(#myGradient)" class="image" />
+  <rect fill="url(#myGradient)" class="why-ingredient" />
+  <rect fill="url(#myGradient)" class="title" />
+  <rect fill="url(#myGradient)" class="description-first-line" />
+  <rect fill="url(#myGradient)" class="description-second-line" />
+  
+  <!-- Author -->
+  <circle fill="url(#myGradient)" class="avatar" />
+  <rect fill="url(#myGradient)" class="author-name" />
+  <rect fill="url(#myGradient)" class="date" />
+</svg>

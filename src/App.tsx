@@ -4,6 +4,7 @@ import About from "./-root/pages/About"
 import TVSeries from "./-root/pages/TVSeries"
 import Movie from "./-root/pages/Movie"
 import RootLayout from "./-root/RootLayout"
+import MovieDetails from "./-root/pages/MovieDetails"
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
                 <Route path="/about" element={<About/>}/>
                 <Route path="/tvseries" element={<TVSeries/>}/>
                 <Route path="/movies" element={<Movie/>}/>
+                <Route path="/movie/:id" element={<MovieDetails/>}/>
 
             </Route>
         </Routes>
