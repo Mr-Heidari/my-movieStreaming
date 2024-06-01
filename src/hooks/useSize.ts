@@ -8,7 +8,7 @@ const useSize = () => {
       if (window.innerWidth > 768) {
         setWindowSize(Math.ceil(window.innerWidth / 305));
       } else {
-        setWindowSize(Math.ceil(window.innerWidth / 200));
+        setWindowSize(Math.ceil(window.innerWidth / 170));
       }
     };
     window.addEventListener("resize", windowSizeHandler);

@@ -4,6 +4,9 @@ import { BrowserRouter } from "react-router-dom";
 import "./global.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+// Import Swiper styles
+import "swiper/css";
+import 'swiper/css/navigation';
 
 import QueryProvider from "./lib/react-query/Quert-Provider";
 
