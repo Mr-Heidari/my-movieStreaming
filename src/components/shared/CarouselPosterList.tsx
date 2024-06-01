@@ -1,11 +1,4 @@
 import { Media } from "@/types";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 import { Card, CardContent } from "../ui/card";
 
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
