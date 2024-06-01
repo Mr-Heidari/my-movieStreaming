@@ -65,9 +65,11 @@ const CarouselPosterList = ({
 
   const settings = {
     infinite: false,
+    speed: 200,
     slidesToShow: numberofSlides ,
     slidesToScroll: numberofSlides,
     swipe:false,
+   
     afterChange: function(index) {
       console.log(
         `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
@@ -79,7 +81,6 @@ const CarouselPosterList = ({
         settings: {
           slidesToShow:  numberofSlides,
           swipe:true,
-          slidesToScroll: numberofSlides ,
         }
       },],
     nextArrow: <SampleNextArrow />,
