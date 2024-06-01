@@ -17,7 +17,7 @@ import {
   InfiniteData,
   InfiniteQueryObserverResult,
 } from "@tanstack/react-query";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import useSize from "@/hooks/useSize";
@@ -36,6 +36,28 @@ type props = {
   mediaType?: string;
 };
 
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block", background: "red" }}
+      onClick={onClick}
+    />
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block", background: "rgba(0,0,0,0.6)" ,height: '100%', width:'50px ', zIndex:'10'}}
+      onClick={onClick}
+    />
+  );
+}
+
 const CarouselPosterList = ({
   title,
   items,
@@ -46,43 +68,22 @@ const CarouselPosterList = ({
 }: props) => {
   const { ref, inView } = useInView();
 
-  const windowSize = useSize();
+  const numberofSlides = useSize();
 
   const settings = {
     infinite: false,
-    slidesToShow: Math.ceil(windowSize[0] / 285),
-    slidesToScroll: Math.ceil(windowSize[0] / 285),
-    nextArrow: <div className="w-5 h-20 bg-white"></div>,
-    prevArrow: (
-      <div
-        className="w-5 h-20 bg-red-200"
-        style={{ display: "block", background: "red" }}
-      ></div>
-    ),
-    responsive: [
-      {
-        breakpoint: 768,
-        settings: {
-          infinite: false,
-          slidesToShow: Math.ceil(windowSize[0] / 285),
-          slidesToScroll:Math.ceil(windowSize[0] / 285),
-          nextArrow: <div className="w-5 h-20 bg-white"></div>,
-          prevArrow: (
-            <div
-              className="w-5 h-20 bg-red-200"
-              style={{ display: "block", background: "red" }}
-            ></div>
-          ),
-        },
-      },
-    ],
+    slidesToShow: numberofSlides ,
+    slidesToScroll:numberofSlides,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />
   };
 
   useEffect(() => {
     if (inView && fetchNextPage && items) {
       fetchNextPage();
     }
-    console.log("eybaba");
+    
+    console.log(numberofSlides);
   }, [inView]);
 
   return (
@@ -103,7 +104,7 @@ const CarouselPosterList = ({
           </div>
         ) : (
           <>
-            <Slider className="mx-10  cursor-pointer  " {...settings}>
+            <Slider className="mx-5  cursor-pointer  " {...settings}>
               {items &&
                 (items.results !== undefined ? items.results : items).map(
                   (card: Media) => (

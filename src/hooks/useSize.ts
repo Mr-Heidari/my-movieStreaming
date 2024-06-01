@@ -1,18 +1,24 @@
 import { useEffect, useState } from "react";
 const useSize = () => {
-  const [windowSize, setWindowSize] = useState([
-    window.innerWidth,
-  ]);
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
 
   useEffect(() => {
     const windowSizeHandler = () => {
-      setWindowSize([window.innerWidth]);
+      console.log("are");
+      if (window.innerWidth > 768) {
+        setWindowSize(Math.ceil(window.innerWidth / 305));
+      } else {
+        setWindowSize(Math.ceil(window.innerWidth / 200));
+      }
     };
     window.addEventListener("resize", windowSizeHandler);
+
+    windowSizeHandler();
+
     return () => {
       window.removeEventListener("resize", windowSizeHandler);
     };
-  }, []);
+  });
 
   return windowSize;
 };
