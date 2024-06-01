@@ -71,12 +71,13 @@ const CarouselPosterList = ({
             <Swiper
               slidesPerView={numberofSlides}
               slidesPerGroup={numberofSlides - 1}
+              
             >
               <SwiperButtons></SwiperButtons>
               {items &&
                 (items.results !== undefined ? items.results : items).map(
                   (card: Media) => (
-                    <SwiperSlide className="w-fit">
+                    <SwiperSlide className="max-w-fit h-fit">
                       <Link
                         to={
                           mediaType
@@ -91,7 +92,7 @@ const CarouselPosterList = ({
                           key={card?.id}
                           className="max-w-fit p-0 text-white flex flex-col gap-5 "
                         >
-                          <Card className=" border-4 border-black/50 ">
+                          <Card className=" border-4 border-black/50  ">
                             <CardContent className=" p-0 relative ">
                               <div className="relative">
                                 <img
@@ -178,8 +179,9 @@ const CarouselPosterList = ({
                     </SwiperSlide>
                   )
                 )}
-              <SwiperSlide>
-                {hasNextPage && items && (
+
+              {hasNextPage && items && (
+                <SwiperSlide>
                   <div className=" " ref={ref}>
                     <Skeleton className="h-[220px] w-[110px] md:h-[380px] md:w-[200px] flex flex-col-reverse gap-2 items-center  p-2  bg-neutral-800 relative">
                       <Skeleton className="  w-10 h-4  bg-neutral-600" />
@@ -192,8 +194,8 @@ const CarouselPosterList = ({
                       />
                     </Skeleton>
                   </div>
-                )}
-              </SwiperSlide>
+                </SwiperSlide>
+              )}
             </Swiper>
           </div>
         )}
