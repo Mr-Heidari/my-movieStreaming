@@ -84,7 +84,7 @@ const CarouselPosterList = ({
                                   src={`https://image.tmdb.org/t/p/w500${card?.poster_path}`}
                                   className="min-w-[100px] h-[150px] md:min-w-[200px] md:h-[300px] rounded-md  hover:bg-gradient-to-t hover:from-black"
                                   alt=""
-                                  loading="lazy"
+                                  
                                 />
                                 <div className="h-full w-full absolute bottom-0 opacity-0 hover:opacity-100 hover:bg-gradient-to-t hover:from-black/70  flex">
                                   <img className="m-auto w-10 h-10 md:w-16  md:h-16 opacity-75 bg-black rounded-full p-2" src="/assets/icons/right-arrow.svg" />
