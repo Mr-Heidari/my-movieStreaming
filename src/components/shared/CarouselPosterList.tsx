@@ -66,10 +66,25 @@ const CarouselPosterList = ({
   const settings = {
     infinite: false,
     slidesToShow: numberofSlides ,
-    slidesToScroll:numberofSlides,
-    swipeToSlide: true,
+    slidesToScroll: numberofSlides,
+    swipe:false,
+    afterChange: function(index) {
+      console.log(
+        `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
+      );
+    },
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow:  numberofSlides,
+          swipe:true,
+          swipeToSlide:true,
+        }
+      },],
     nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />
+    prevArrow: <SamplePrevArrow />,
+
   };
 
   useEffect(() => {
@@ -98,7 +113,7 @@ const CarouselPosterList = ({
           </div>
         ) : (
           <>
-            <Slider className="mx-5  cursor-pointer  " {...settings}>
+            <Slider className="mx-6  cursor-pointer  center" {...settings}>
               {items &&
                 (items.results !== undefined ? items.results : items).map(
                   (card: Media) => (
