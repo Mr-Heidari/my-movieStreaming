@@ -71,13 +71,22 @@ const CarouselPosterList = ({
   const numberofSlides = useSize();
 
   const settings = {
+    className: "  center",
     infinite: false,
-    speed: 200,
+    speed: 300,
     slidesToShow: numberofSlides,
     slidesToScroll: numberofSlides,
     swipe: false,
-    nextArrow: <div><SampleNextArrow /></div>,
-    prevArrow: <div><SamplePrevArrow /></div>,
+    nextArrow: (
+      <div>
+        <SampleNextArrow />
+      </div>
+    ),
+    prevArrow: (
+      <div>
+        <SamplePrevArrow />
+      </div>
+    ),
     afterChange: function (index) {
       console.log(
         `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
@@ -87,9 +96,11 @@ const CarouselPosterList = ({
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: numberofSlides,
           swipe: true,
-          arrows: false
+          slidesToShow: numberofSlides,
+          slidesToScroll: 1,
+          swipeToSlide: true,
+          arrows: false,
         },
       },
     ],
@@ -120,8 +131,8 @@ const CarouselPosterList = ({
             />
           </div>
         ) : (
-          <>
-            <Slider className="mx-6  cursor-pointer  center" {...settings}>
+          <div className="mx-6  cursor-pointer">
+            <Slider {...settings}>
               {items &&
                 (items.results !== undefined ? items.results : items).map(
                   (card: Media) => (
@@ -241,7 +252,7 @@ const CarouselPosterList = ({
                 </div>
               )}
             </Slider>
-          </>
+          </div>
         )}
       </main>
     </div>
