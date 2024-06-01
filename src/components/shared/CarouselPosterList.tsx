@@ -79,7 +79,7 @@ const CarouselPosterList = ({
         settings: {
           slidesToShow:  numberofSlides,
           swipe:true,
-          slidesToScroll: numberofSlides,
+          slidesToScroll: numberofSlides - 1,
           swipeToSlide:true,
         }
       },],
