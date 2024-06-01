@@ -71,7 +71,7 @@ const CarouselPosterList = ({
             <Swiper
               slidesPerView={numberofSlides}
               slidesPerGroup={numberofSlides - 1}
-              
+              spaceBetween={20}
             >
               <SwiperButtons></SwiperButtons>
               {items &&
