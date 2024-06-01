@@ -45,7 +45,14 @@ function SamplePrevArrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style, display: "block", background: "rgba(0,0,0,0.6)" ,height: '100%', width:'50px ', zIndex:'10'}}
+      style={{
+        ...style,
+        display: "block",
+        background: "rgba(0,0,0,0.6)",
+        height: "100%",
+        width: "50px ",
+        zIndex: "10",
+      }}
       onClick={onClick}
     />
   );
@@ -66,11 +73,12 @@ const CarouselPosterList = ({
   const settings = {
     infinite: false,
     speed: 200,
-    slidesToShow: numberofSlides ,
+    slidesToShow: numberofSlides,
     slidesToScroll: numberofSlides,
-    swipe:false,
-   
-    afterChange: function(index) {
+    swipe: false,
+    nextArrow: <div><SampleNextArrow /></div>,
+    prevArrow: <div><SamplePrevArrow /></div>,
+    afterChange: function (index) {
       console.log(
         `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
       );
@@ -79,20 +87,19 @@ const CarouselPosterList = ({
       {
         breakpoint: 768,
         settings: {
-          slidesToShow:  numberofSlides,
-          swipe:true,
-        }
-      },],
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-
+          slidesToShow: numberofSlides,
+          swipe: true,
+          arrows: false
+        },
+      },
+    ],
   };
 
   useEffect(() => {
     if (inView && fetchNextPage && items) {
       fetchNextPage();
     }
-    
+
     console.log(numberofSlides);
   }, [inView]);
 
