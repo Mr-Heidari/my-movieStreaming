@@ -67,6 +67,7 @@ const CarouselPosterList = ({
     infinite: false,
     slidesToShow: numberofSlides ,
     slidesToScroll:numberofSlides,
+    swipeToSlide: true,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />
   };
