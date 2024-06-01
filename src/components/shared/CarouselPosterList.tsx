@@ -98,8 +98,8 @@ const CarouselPosterList = ({
         settings: {
           swipe: true,
           slidesToShow: numberofSlides,
-          slidesToScroll: 1,
-          swipeToSlide: true,
+          touchMove:true,
+          touchThreshold:10,
           arrows: false,
         },
       },
