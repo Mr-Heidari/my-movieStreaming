@@ -295,9 +295,9 @@ const MediaBar = () => {
   });
   return (
     <div className=" flex flex-col gap-1">
-      <header className=" flex flex-row gap-16 text-white mt-5 max-md:scale-75 mx-2 max-md:-translate-x-[10%]">
+      <header className=" flex flex-row md:gap-16 gap-5 text-white mt-5 max-md:scale-90 mx-2 max-md:-translate-x-[5%]">
 
-        <h3 className="md:text-2xl font-semibold ">Media</h3>
+        <h3 className="md:text-2xl font-semibold my-auto">Media</h3>
         <Tabs defaultValue={mediaTab} className="w-[400px] ">
           <TabsList className="  "  >
             {MediaBarTabs.map((tab) => (
@@ -307,7 +307,6 @@ const MediaBar = () => {
             ))}
           </TabsList>
         </Tabs>
-        
       </header>
       <hr  className=" mx-2 opacity-70"/>
       <main>
