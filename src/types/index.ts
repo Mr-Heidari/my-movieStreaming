@@ -13,7 +13,7 @@ export type Media = {
   video: boolean;
   vote_average: number;
   vote_count: number;
-  media_type:string;
+  media_type: string;
 };
 
 export type MovieDetaile = {
@@ -52,7 +52,7 @@ export type MovieDetaile = {
 export type SeriesDetaile = {
   adult: boolean;
   backdrop_path: string;
-  created_by: [{name:string}];
+  created_by: [{ name: string }];
   episode_run_time: [];
   first_air_date: string;
   genres: [
@@ -87,4 +87,19 @@ export type SeriesDetaile = {
   type: string;
   vote_average: number;
   vote_count: number;
+};
+
+export type MovieCredits = {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string;
+  cast_id: number;
+  character: string;
+  credit_id: string;
+  order: number;
 };

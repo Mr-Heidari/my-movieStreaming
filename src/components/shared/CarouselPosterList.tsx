@@ -77,7 +77,7 @@ const CarouselPosterList = ({
               {items &&
                 (items.results !== undefined ? items.results : items).map(
                   (card: Media) => (
-                    <SwiperSlide className="max-w-fit h-fit">
+                    <SwiperSlide className="max-w-fit h-fit" key={card?.id}>
                       <Link
                         to={
                           mediaType
@@ -89,7 +89,6 @@ const CarouselPosterList = ({
                       >
                         <div
                           onClick={() => console.log(items)}
-                          key={card?.id}
                           className="max-w-fit p-0 text-white flex flex-col gap-5 "
                         >
                           <Card className=" border-4 border-black/50  ">

@@ -5,8 +5,11 @@ import {
   getAllWeekTrendings,
   getInifinityPopulareMovies,
   getMovieById,
+  getMovieCreditById,
   getMovieDirectorAndWriter,
+  getMovieImagesById,
   getMovieRealeseDateById,
+  getMovieVideoById,
   getSerieById,
 } from "@/api/tmdb";
 import { MovieDetaile, SeriesDetaile } from "@/types";
@@ -69,7 +72,7 @@ export const useGetMovieReleaseDateById = ({ id }: { id: string }) => {
 
 export const useGetMovieDirectorAndWriter = ({ id }: { id: string }) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return useQuery<any[]|undefined>({
+  return useQuery<any[] | undefined>({
     queryKey: [QUERY_KEYS.GET_MOVIE_DIRECTOR_WRITER],
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore: Unreachable code error
@@ -84,4 +87,23 @@ export const useGetSeriesById = ({ id }: { id: string }) => {
   });
 };
 
+export const useGetCreditByMovieId = ({ id }: { id: string }) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_MOVIE_CREDITS_BY_ID],
+    queryFn: () =>  getMovieCreditById(id),
+  });
+};
 
+export const useGetImageByMovieId = ({ id }: { id: string }) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_MOVIE_Image_BY_ID],
+    queryFn: () =>  getMovieImagesById(id),
+  });
+};
+
+export const useGetVideoByMovieId = ({ id }: { id: string }) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_MOVIE_VIDEO_BY_ID],
+    queryFn: () =>  getMovieVideoById(id),
+  });
+};

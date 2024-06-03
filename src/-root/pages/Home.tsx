@@ -16,7 +16,7 @@ const Home = () => {
   const { data: allTrendings, isPending: isTrendingLoading } =
     useGetAllDayTrendings();
 
-  const { data: suggestedMovie, } =
+  const { data: suggestedMovie, isPending: isSuggestedMovieLoading } =
     useGetAllWeekTrendings();
 
   const { data: popul, fetchNextPage ,hasNextPage ,isLoading:isPopulareLoading} = useGetInifinityPopulareMovies();
@@ -87,7 +87,7 @@ const Home = () => {
           <CarouselPosterList items={allTrendings} title={"Trending"} isLoading={isTrendingLoading} />
         </section>
         <section>
-          <SuggestedMovieCard item={suggestedMovie} />
+          <SuggestedMovieCard item={suggestedMovie} loader={isSuggestedMovieLoading} />
         </section>
         <section className="mt-5">
           <CarouselPosterList items={inifinityItems?.flat(1)} title={"What's Popular"} isLoading={isPopulareLoading} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} mediaType={'movie'}/>

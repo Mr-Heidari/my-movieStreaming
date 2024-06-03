@@ -133,3 +133,50 @@ export async function getSerieById(id: string) {
   }
 }
 
+export async function getMovieCreditById(id: string) {
+  try {
+    const credits = await fetch(
+      `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`,
+      options
+    )
+      .then((respons) => respons.json())
+      .then((credit) => credit.cast);
+
+    if (!credits) throw Error;
+    console.log(credits);
+    return credits;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function getMovieImagesById(id: string) {
+  try {
+    const images = await fetch(
+      `https://api.themoviedb.org/3/movie/${id}/images`,
+      options
+    ).then((response) => response.json());
+
+    if (!images) throw Error;
+
+    return images;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getMovieVideoById(id: string) {
+  try {
+    const images = await fetch(
+      `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`,
+      options
+    ).then((response) => response.json()).then((json)=>json.results);
+
+    if (!images) throw Error;
+
+    return images;
+  } catch (error) {
+    console.log(error);
+  }
+}
