@@ -310,8 +310,8 @@ const MovieDetails = () => {
           <section>
             <MediaBar />
           </section>
-          <section className="md:hidden mt-5 mx-2">
-            <h3 className="md:text-2xl font-semibold my-auto mb-2">Recommendations</h3>
+          <section className="lg:hidden mt-5 mx-2">
+            <h3 className="lg:text-2xl font-semibold my-auto mb-2">Recommendations</h3>
           <RecomendedCarouselList />
           </section>
           <section className=" mt-5 m-2">

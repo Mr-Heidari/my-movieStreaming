@@ -1,5 +1,3 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperButtons from "./SwiperButtons";
 import { Card, CardContent } from "../ui/card";
 import { Skeleton } from "../ui/skeleton";
 import { useGetInifinityRecomendedMovies } from "@/lib/react-query/queries";
@@ -16,10 +14,8 @@ const RecomendedCarouselList = () => {
     <div className="">
       <>
         <main>
-          <Swiper slidesPerView={1} slidesPerGroup={1}  spaceBetween={20} >
-            <SwiperButtons></SwiperButtons>
+          <section className="flex flex-row max-w-full overflow-x-auto section p-2 gap-5">
             {recomended?.results.slice(0, 8).map((movie: MovieDetaile) => (
-              <SwiperSlide key={movie.id} className="max-w-fit bg-red-50">
                 <Link to={`/movie/${movie.id}`}>
                   <div className="max-w-fit p-0 text-white flex flex-row gap-5 relative w-[300px]">
                     <Card className=" border-4 border-black/50  ">
@@ -57,9 +53,8 @@ const RecomendedCarouselList = () => {
                     </Card>
                   </div>
                 </Link>
-              </SwiperSlide>
             ))}
-          </Swiper>
+          </section>
         </main>
       </>
     </div>

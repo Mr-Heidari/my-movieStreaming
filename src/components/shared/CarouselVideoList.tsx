@@ -10,7 +10,7 @@ const CarouselVideoList = ({ item }: props) => {
   return (
     <>
       <main className="w-full relative">
-        <div className="max-w-fit h-fit flex flex-row max-md:gap-20 gap-5 py-2 overflow-x-auto section md:mx-5">
+        <div className="max-w-fit h-fit flex flex-row max-md:gap-20 gap-5 py-2 mx-2 overflow-x-auto section md:mx-5">
           {item &&
             item.map((video) => (
               <div className=" max-w-fit z-10  ">
