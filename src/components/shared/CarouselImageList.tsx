@@ -37,10 +37,7 @@ const CarouselImageList = ({ item, type }: props) => {
                               ? `https://image.tmdb.org/t/p/w500${image.file_path}`
                               : "/assets/icons/feelnessemoji.svg"
                           }
-                          className={` h-full w-full  hover:bg-gradient-to-t rounded-md ${
-                            type === "backdrop"
-                              ? "object-cover"
-                              : "object-contain"
+                          className={` h-full w-full  hover:bg-gradient-to-t rounded-md object-contain
                           }`}
                           alt=""
                         />

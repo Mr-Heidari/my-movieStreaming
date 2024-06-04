@@ -6,8 +6,8 @@ import {
   useGetVideoByMovieId,
 } from "@/lib/react-query/queries";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import { useParams } from "react-router-dom";
-
+import {  useParams } from "react-router-dom";
+import { Link as SmoothScroll } from "react-scroll";
 import {
   HoverCard,
   HoverCardContent,
@@ -67,9 +67,9 @@ const MovieDetails = () => {
   return (
     <div className="py-28  lg:flex lg:flex-row">
       <section className="relative order-0  box-border lg:max-w-[78%] md:mr-2">
-        <header className=" ">
+        <header className=" ml-2 ">
           <div
-            className={`w-full  md:h-[400px] h-[250px]  flex flex-row p-2 sm:p-5 lg:px-20 sm:px-5 relative ${
+            className={`w-full  md:h-[400px] h-[250px]  flex flex-row p-2 sm:p-5 lg:px-5 sm:px-5 relative ${
               isDetailLoading ? "bg-neutral-800" : "bg-black/50"
             }  overflow-hidden gap-0 sm:gap-5 border-y-2 border-white/30`}
           >
@@ -102,7 +102,7 @@ const MovieDetails = () => {
 
                 <section className="flex flex-col gap-3 md:gap-5 justify-center text-white w-full  max-sm:scale-[73%] max-md:scale-[65%] max-md:-translate-x-[10%]  min-w-[80%]">
                   <div>
-                    <h1 className="text-4xl font-bold flex flex-row gap-2 max-md:text-xl">
+                    <h1 className="text-4xl font-bold flex flex-row gap-2 max-md:text-xl line-clamp-1 text-ellipsis">
                       {movieDetaile?.original_title}{" "}
                       <p className="text-white/50">{`(${movieDetaile?.release_date?.slice(
                         0,
@@ -151,58 +151,6 @@ const MovieDetails = () => {
                     </div>
                     <p>User Score</p>
                   </div>
-                  <div className="flex flex-row gap-5 w-full max-sm:hidden">
-                    {/** like  */}
-                    <HoverCard>
-                      <HoverCardTrigger>
-                        <img
-                          src="/assets/icons/like-icone.svg"
-                          alt=""
-                          className=" max-md:w-6 w-12 bg-red-900 p-3 rounded-full brightness-200 cursor-pointer min-w-10"
-                        />
-                      </HoverCardTrigger>
-                      <HoverCardContent className="bg-red-700 w-fit p-1 px-2 border-none text-xs">
-                        like
-                      </HoverCardContent>
-                    </HoverCard>
-
-                    <HoverCard>
-                      <HoverCardTrigger>
-                        <img
-                          src="/assets/icons/dislike-icone.svg"
-                          alt=""
-                          className=" max-md:w-6 w-12 bg-red-900 p-3 rounded-full brightness-200 cursor-pointer min-w-10"
-                        />
-                      </HoverCardTrigger>
-                      <HoverCardContent className="bg-red-700 w-fit p-1 px-2 border-none text-xs">
-                        dislike
-                      </HoverCardContent>
-                    </HoverCard>
-
-                    {/** save  */}
-                    <HoverCard>
-                      <HoverCardTrigger>
-                        <img
-                          src="/assets/icons/save.svg"
-                          alt=""
-                          className=" max-md:w-6 min-w-10 w-12 bg-red-900 p-3 rounded-full brightness-200 cursor-pointer"
-                          title="asghar"
-                        />
-                      </HoverCardTrigger>
-                      <HoverCardContent className="bg-red-700 w-fit p-1 px-2 border-none text-xs">
-                        Add to your watchlist
-                      </HoverCardContent>
-                    </HoverCard>
-
-                    <div className=" flex flex-row  w-full items-center cursor-pointer brightness-75 hover:brightness-100 transition">
-                      <img
-                        src="/assets/icons/play-icone.svg"
-                        alt=""
-                        className="w-10 h-10"
-                      />
-                      <p>Play trailer</p>
-                    </div>
-                  </div>
 
                   <div>
                     <h2 className="text-2xl font-semibold max-sm:text-lg">
@@ -247,16 +195,22 @@ const MovieDetails = () => {
             </p>
           </section>
           {/** just show on mobile */}
-          <section className=" text-white md:hidden p-5 w-full">
+          <section className=" text-white  p-5 w-full">
             <div className="w-full flex flex-row justify-between  items-center gap-2">
-              <button className=" flex flex-row items-center cursor-pointer hover:brightness-75 brightness-100 transition p-2 pr-4 rounded-md bg-red-700 justify-center w-fit">
+              <SmoothScroll
+                to={"mediatab"}
+                smooth={true}
+                duration={200}
+                offset={-100}
+                className=" flex flex-row items-center cursor-pointer hover:brightness-75 brightness-100 transition p-2 pr-4 rounded-md bg-red-700 justify-center w-fit"
+              >
                 <img
                   src="/assets/icons/play-icone.svg"
                   alt=""
                   className="w-8 h-8  object-cover"
                 />
                 <p className="line-clamp-1">Play trailer</p>
-              </button>
+              </SmoothScroll>
               <div className="flex flex-row border-2 border-white/30 w-fit p-1 gap-2 rounded-md">
                 {/** like */}
                 <HoverCard>
@@ -302,20 +256,32 @@ const MovieDetails = () => {
               </div>
             </div>
           </section>
-          <section className="text-white/85 mx-2 flex flex-col gap-1 md:my-10">
-            <h3 className=" md:text-2xl font-semibold mb-2">Top Billed Cast</h3>
 
+
+          <hr className="mx-2 border-white/50 mb-5"/>
+
+
+          <section className="text-white/85 mx-2 flex flex-col gap-1">
+            <h3 className=" md:text-2xl font-semibold mb-2">Top Billed Cast</h3>
             <CarouselCreditList item={credits} loading={isCreditOnLoading} />
           </section>
+
+          <hr className="mx-2 border-white/50 my-5 mt-10"/>
           <section>
             <MediaBar />
           </section>
+
+          <hr className=" mx-2 border-white/50 my-5" />
+          
+
           <section className="lg:hidden mt-5 mx-2">
-            <h3 className="lg:text-2xl font-semibold my-auto mb-2">Recommendations</h3>
-          <RecomendedCarouselList />
+            <h3 className="lg:text-2xl font-semibold my-auto mb-2">
+              Recommendations
+            </h3>
+            <RecomendedCarouselList />
           </section>
           <section className=" mt-5 m-2">
-            <h3 className="md:text-2xl font-semibold  ">Comments</h3>
+            <h3 className="md:text-2xl font-semibold  mb-5">Comments</h3>
             <hr className="mx-2 border-black/50" />
             <div className="w-full h-52 bg-neutral-950 rounded-md p-3">
               <div className="md:mx-10 mx-1 flex flex-row p-1 bg-neutral-800 rounded-full">
@@ -327,16 +293,16 @@ const MovieDetails = () => {
                   className="border-none placeholder:text-white/50"
                   placeholder="add your comment"
                 />
-                <button className="my-auto flex flex-row opacity-80 p-2 px-6 md:px-4  rounded-full bg-neutral-900 max-md:scale-90" >
-                  <p >Send</p>
-                  <img src="/assets/icons/send-icone.svg" alt=""  />
+                <button className="my-auto flex flex-row opacity-80 p-2 px-6 md:px-4  rounded-full bg-neutral-900 max-md:scale-90">
+                  <p>Send</p>
+                  <img src="/assets/icons/send-icone.svg" alt="" />
                 </button>
               </div>
             </div>
           </section>
         </main>
       </section>
-      <aside className="order-1   max-lg:hidden">
+      <aside className="order-1 border-l-white/20 border-l-2  max-lg:hidden">
         <RecomendedMovieList />
       </aside>
     </div>
@@ -354,14 +320,14 @@ const MediaBar = () => {
     id: id || "",
   });
   return (
-    <div className=" flex flex-col gap-1">
+    <div className=" flex flex-col gap-1 " id="mediatab">
       <header className=" flex flex-row md:gap-16 gap-5 text-white/85 mt-5 max-md:scale-90 mx-2 max-md:-translate-x-[5%]">
         <h3 className="md:text-2xl font-semibold my-auto">Media</h3>
         <Tabs defaultValue={mediaTab} className="w-[400px] ">
           <TabsList className="  ">
             {MediaBarTabs.map((tab) => (
               <TabsTrigger
-                className=" bg-neutral-950"
+                className=" bg-neutral-950 rounded-none"
                 value={tab}
                 onClick={() => setMediaTab(tab)}
               >
@@ -371,7 +337,7 @@ const MediaBar = () => {
           </TabsList>
         </Tabs>
       </header>
-      <hr className=" mx-2 border-black/50" />
+      <hr className=" mx-2 border-white/50" />
       <main>
         <section className={`${mediaTab === "Backdrops" ? " " : "hidden"}`}>
           {imageIsLoading ? (
