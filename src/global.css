@@ -28,6 +28,16 @@
   background: rgb(188, 15, 15);
   border-radius: 10px;
 }
+
+ /* Hide scrollbar for Chrome, Safari and Opera */
+ .no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
   .top-contianer {
     @apply flex flex-row  max-lg:gap-10 w-full px-[5%] justify-between h-20  items-center bg-zinc-900 fixed z-50 drop-shadow-[0_20px_30px_rgba(0,0,0,0.9)];
   }

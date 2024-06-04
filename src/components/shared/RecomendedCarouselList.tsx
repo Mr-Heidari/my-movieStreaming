@@ -14,7 +14,7 @@ const RecomendedCarouselList = () => {
     <div className="">
       <>
         <main>
-          <section className="flex flex-row max-w-full overflow-x-auto section p-2 gap-5">
+          <section className="flex flex-row max-w-full overflow-x-auto section p-2 gap-5 max-md:no-scrollbar">
             {recomended?.results.slice(0, 8).map((movie: MovieDetaile) => (
                 <Link to={`/movie/${movie.id}`}>
                   <div className="max-w-fit p-0 text-white flex flex-row gap-5 relative w-[300px]">

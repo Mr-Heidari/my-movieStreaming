@@ -6,7 +6,7 @@ import { useRef } from "react";
 type props = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   item: any;
-  type: string;
+  type: string; 
 };
 const CarouselImageList = ({ item, type }: props) => {
   const classname = useRef<string>();
@@ -19,7 +19,7 @@ const CarouselImageList = ({ item, type }: props) => {
     <div className="mx-2">
       <>
         <main>
-          <div className="max-w-fit h-fit flex flex-row  gap-5 py-2 mx-2 overflow-x-auto section md:mx-5">
+          <div className="max-w-fit h-fit flex flex-row  gap-5 py-2 mx-2 overflow-x-auto section md:mx-5 max-md:no-scrollbar">
             
             {item &&
               item.map((image) => (
