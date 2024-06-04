@@ -65,7 +65,7 @@ const MovieDetails = () => {
   return (
     <div className="py-28  lg:flex lg:flex-row">
       <section className="relative order-0  box-border lg:max-w-[78%] md:mr-2">
-        <header className=" ml-2 ">
+        <header className=" md:ml-2 ">
           <div
             className={`w-full  md:h-[400px] h-[250px]  flex flex-row p-2 sm:p-5 lg:px-5 sm:px-5 relative ${
               isDetailLoading ? "bg-neutral-800" : "bg-black/50"
