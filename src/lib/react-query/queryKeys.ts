@@ -11,6 +11,10 @@ export enum QUERY_KEYS {
     GET_MOVIE_Image_BY_ID = "getMovieImagesbyId",
     GET_MOVIE_VIDEO_BY_ID = "getMovieVideosbyId",
     GET_SERIES_BY_ID="getSeriesbyId",
+    GET_SERIES_CREDIT_BY_ID="getSeriesCreditById",
+    GET_SERIES_IMAGE_BY_ID="getSeriesImageById",
+    GET_SERIES_VIDEO_BY_ID="getSeriesVideoById",
+    GET_SERIES_RECOMENDED_BY_ID="getSeriesRecomendedById",
     GET_Series_Creator="getSeriesCreator"
   }
   

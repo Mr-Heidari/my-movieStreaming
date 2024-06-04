@@ -13,16 +13,16 @@ type props = {
 const CarouselCreditList = ({ item }: props) => {
   return (
     <>
-      <main>
+      <main className="bg-neutral-950 rounded-lg p-3">
         <Swiper slidesPerView={"auto"} slidesPerGroup={4} spaceBetween={20}>
           <SwiperButtons></SwiperButtons>
           {item &&
             item.map((people: MovieCredits) => (
-              <SwiperSlide key={people.id} className="max-w-fit">
+              <SwiperSlide key={people.id} className="max-w-fit border-none">
                 <div className="max-w-fit p-0 text-white flex flex-col gap-5 ">
-                  <Card className=" border-none bg-neutral-950">
+                  <Card className=" border-none">
                     <CardContent className=" p-0 relative min-w-[100px] max-w-[100px] md:min-w-[200px] h-fit">
-                      <div className="relative min-w-[100px] max-w-[100px] md:min-w-[200px] md:h-[300px] h-[150px]">
+                      <div className="relative min-w-[100px] max-w-[100px] md:min-w-[200px] md:h-[300px] h-[150px] ">
                         <img
                           src={
                             people.profile_path

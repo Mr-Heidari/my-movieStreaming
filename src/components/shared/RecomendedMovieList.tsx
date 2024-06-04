@@ -1,23 +1,18 @@
-import { useGetInifinityRecomendedMovies } from "@/lib/react-query/queries";
-import { MovieDetaile } from "@/types";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Card, CardContent } from "../ui/card";
 import { Skeleton } from "../ui/skeleton";
 
-const RecomendedMovieList = () => {
-  const { id } = useParams();
-
-  const { data: recomended } = useGetInifinityRecomendedMovies(id || "");
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const RecomendedMovieList = ({ item,type }: { item: any; type:string }) => {
   return (
-    <div className="w-[300px] max-h-fit border-2 bg-neutral-800 border-black/50 rounded-md p-2  text-white">
+    <div className="w-[300px] max-h-fit  bg-neutral-950 rounded-md p-2  text-white">
       <header>
         <h2 className="text-2xl font-semibold mb-2">Recommendations</h2>
       </header>
       <main>
         <section className="flex flex-col gap-2">
-          {recomended?.results.slice(0,8).map((movie: MovieDetaile) => (
-            <Link to={`/movie/${movie.id}`}>
+          {item?.results.slice(0, 8).map((movie) => (
+            <Link to={`/${type}/${movie.id}`}>
               <div className="max-w-fit p-0 text-white flex flex-row gap-5 relative ">
                 <Card className=" border-4 border-black/50  ">
                   <CardContent className=" p-0 relative ">
@@ -47,7 +42,9 @@ const RecomendedMovieList = () => {
                           ? movie?.title
                           : movie?.original_title
                           ? movie?.original_title
-                          : ""}
+                          : movie?.name
+                          ? movie?.name
+                          : movie?.original_name}
                       </p>
                     </div>
                   </CardContent>

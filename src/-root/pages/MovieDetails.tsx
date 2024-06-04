@@ -1,9 +1,9 @@
 import {
   useGetCreditByMovieId,
-  useGetImageByMovieId,
+  useGetInifinityRecomendedMovies,
   useGetMovieById,
   useGetMovieDirectorAndWriter,
-  useGetVideoByMovieId,
+
 } from "@/lib/react-query/queries";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import {  useParams } from "react-router-dom";
@@ -13,18 +13,14 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
 import CarouselCreditList from "@/components/shared/CarouselCreditList";
-import { MediaBarTabs } from "@/constants/mediaBarTabs";
-import CarouselImageList from "@/components/shared/CarouselImageList";
-import CarouselVideoList from "@/components/shared/CarouselVideoList";
-import { useState } from "react";
 import RecomendedMovieList from "@/components/shared/RecomendedMovieList";
 import { languageName } from "@/constants/languageName";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import RecomendedCarouselList from "@/components/shared/RecomendedCarouselList";
+import MediaBar from "@/components/shared/MediaBar";
 
 const Loading = () => {
   return (
@@ -57,6 +53,8 @@ const MovieDetails = () => {
     }
   );
   const { data: D_and_W } = useGetMovieDirectorAndWriter({ id: id || "" });
+
+  const { data: recomended } = useGetInifinityRecomendedMovies(id || "");
 
   const getGenres = () => {
     return movieDetaile?.genres?.map((genre) => {
@@ -278,7 +276,7 @@ const MovieDetails = () => {
             <h3 className="lg:text-2xl font-semibold my-auto mb-2">
               Recommendations
             </h3>
-            <RecomendedCarouselList />
+            <RecomendedCarouselList item={recomended} type="movie"/>
           </section>
           <section className=" mt-5 m-2">
             <h3 className="md:text-2xl font-semibold  mb-5">Comments</h3>
@@ -303,71 +301,11 @@ const MovieDetails = () => {
         </main>
       </section>
       <aside className="order-1 border-l-white/20 border-l-2  max-lg:hidden">
-        <RecomendedMovieList />
+        <RecomendedMovieList item={recomended} type="movie"/>
       </aside>
     </div>
   );
 };
 
-const MediaBar = () => {
-  const { id } = useParams();
 
-  const [mediaTab, setMediaTab] = useState<string>("Videos");
-  const { data: images, isPending: imageIsLoading } = useGetImageByMovieId({
-    id: id || "",
-  });
-  const { data: videos, isPending: videoISLoading } = useGetVideoByMovieId({
-    id: id || "",
-  });
-  return (
-    <div className=" flex flex-col gap-1 " id="mediatab">
-      <header className=" flex flex-row md:gap-16 gap-5 text-white/85 mt-5 max-md:scale-90 mx-2 max-md:-translate-x-[5%]">
-        <h3 className="md:text-2xl font-semibold my-auto">Media</h3>
-        <Tabs defaultValue={mediaTab} className="w-[400px] ">
-          <TabsList className="  ">
-            {MediaBarTabs.map((tab) => (
-              <TabsTrigger
-                className=" bg-neutral-950 rounded-none"
-                value={tab}
-                onClick={() => setMediaTab(tab)}
-              >
-                {tab}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-        </Tabs>
-      </header>
-
-      <main>
-        <section className={`${mediaTab === "Backdrops" ? " " : "hidden"}`}>
-          {imageIsLoading ? (
-            <Skeleton className="w-full h-[300px] bg-neutral-700"></Skeleton>
-          ) : (
-            <CarouselImageList
-              item={images?.backdrops.slice(0, 8)}
-              type="backdrop"
-            />
-          )}
-        </section>
-        <section className={`${mediaTab === "Posters" ? " " : "hidden"}`}>
-          {imageIsLoading ? (
-            <Skeleton className="w-full h-[300px] bg-neutral-700"></Skeleton>
-          ) : (
-            <CarouselImageList
-              item={images?.posters.slice(0, 8)}
-              type="backdrop"
-            />
-          )}
-        </section>
-        <section className={`${mediaTab === "Videos" ? " " : "hidden"}`}>
-          {videoISLoading ? (
-            <Skeleton className="w-full h-[300px] bg-neutral-700"></Skeleton>
-          ) : (
-            <CarouselVideoList item={videos} />
-          )}
-        </section>
-      </main>
-    </div>
-  );
-};
 export default MovieDetails;

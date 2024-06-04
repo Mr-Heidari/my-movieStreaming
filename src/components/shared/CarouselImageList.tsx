@@ -18,13 +18,13 @@ const CarouselImageList = ({ item, type }: props) => {
   return (
     <div className="mx-2">
       <>
-        <main>
+        <main className="bg-neutral-950 rounded-lg p-3">
           <div className="max-w-fit h-fit flex flex-row  gap-5 py-2 mx-2 overflow-x-auto section md:mx-5 max-md:no-scrollbar">
             
             {item &&
               item.map((image) => (
                 <div className="max-w-fit p-0 text-white flex flex-col gap-5 ">
-                  <Card className=" border-none bg-neutral-950 ">
+                  <Card className=" border-none  ">
                     <CardContent
                       className={` p-0 relative ${classname.current} h-fit`}
                     >

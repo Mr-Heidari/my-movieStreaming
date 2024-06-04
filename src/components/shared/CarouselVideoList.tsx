@@ -9,8 +9,8 @@ type props = {
 const CarouselVideoList = ({ item }: props) => {
   return (
     <>
-      <main className="w-full relative">
-        <div className="max-w-fit h-fit flex flex-row max-md:gap-20 gap-5 py-2 mx-2 overflow-x-auto section md:mx-5 max-md:no-scrollbar">
+      <main className="relative bg-neutral-950 p-3 rounded-lg mx-2">
+        <div className="max-w-fit h-fit flex flex-row max-md:gap-20 gap-5 py-2 overflow-x-auto section  max-md:no-scrollbar">
           {item &&
             item.map((video) => (
               <div className=" max-w-fit z-10  ">

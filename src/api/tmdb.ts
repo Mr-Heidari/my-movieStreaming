@@ -118,21 +118,6 @@ export async function getMovieDirectorAndWriter(id: string) {
   }
 }
 
-export async function getSerieById(id: string) {
-  try {
-    const series = await fetch(
-      `https://api.themoviedb.org/3/tv/${id}?language=en-US`,
-      options
-    ).then((response) => response.json());
-
-    if (!series) throw Error;
-
-    return series;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 export async function getMovieCreditById(id: string) {
   try {
     const credits = await fetch(
@@ -168,28 +153,108 @@ export async function getMovieImagesById(id: string) {
 
 export async function getMovieVideoById(id: string) {
   try {
-    const images = await fetch(
+    const video = await fetch(
       `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`,
       options
     )
       .then((response) => response.json())
       .then((json) => json.results);
 
-    if (!images) throw Error;
+    if (!video) throw Error;
 
-    return images;
+    return video;
   } catch (error) {
     console.log(error);
   }
 }
 
-export async function getMovieRecomendationById({id}:{id:string}) {
+export async function getMovieRecomendationById({ id }: { id: string }) {
   try {
     const recomended = await fetch(
       `https://api.themoviedb.org/3/movie/${id}/recommendations?language=en-US&page=1`,
       options
+    ).then((respons) => respons.json());
+    console.log(recomended);
+    if (!recomended) throw Error;
+
+    return recomended;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getSerieById(id: string) {
+  try {
+    const series = await fetch(
+      `https://api.themoviedb.org/3/tv/${id}?language=en-US`,
+      options
+    ).then((response) => response.json());
+
+    if (!series) throw Error;
+
+    return series;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getSeriesCreditById(id: string) {
+  try {
+    const credits = await fetch(
+      `https://api.themoviedb.org/3/tv/${id}/credits?language=en-US`,
+      options
     )
       .then((respons) => respons.json())
+      .then((credit) => credit.cast);
+
+    if (!credits) throw Error;
+    console.log(credits);
+    return credits;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function getSeriesImageById(id: string) {
+  try {
+    const images = await fetch(
+      `https://api.themoviedb.org/3/tv/${id}/images`,
+      options
+    ).then((respons) => respons.json());
+
+    if (!images) throw Error;
+    console.log(images);
+    return images;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function getSeriesVideoById(id: string) {
+  try {
+    const video = await fetch(
+      `https://api.themoviedb.org/3/tv/${id}/videos?language=en-US`,
+      options
+    )
+      .then((response) => response.json())
+      .then((json) => json.results);
+    console.log(video);
+    if (!video) throw Error;
+
+    return video;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getSeriesRecomendationById({ id }: { id: string }) {
+  try {
+    const recomended = await fetch(
+      `https://api.themoviedb.org/3/tv/${id}/recommendations?language=en-US&page=1`,
+      options
+    ).then((respons) => respons.json());
     console.log(recomended);
     if (!recomended) throw Error;
 
