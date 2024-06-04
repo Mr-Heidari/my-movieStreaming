@@ -337,7 +337,7 @@ const MediaBar = () => {
           </TabsList>
         </Tabs>
       </header>
-      <hr className=" mx-2 border-white/50" />
+
       <main>
         <section className={`${mediaTab === "Backdrops" ? " " : "hidden"}`}>
           {imageIsLoading ? (
