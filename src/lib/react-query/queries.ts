@@ -9,6 +9,7 @@ import {
   getMovieDirectorAndWriter,
   getMovieImagesById,
   getMovieRealeseDateById,
+  getMovieRecomendationById,
   getMovieVideoById,
   getSerieById,
 } from "@/api/tmdb";
@@ -56,6 +57,13 @@ export const useGetInifinityPopulareMovies = () => {
   });
 };
 
+export const useGetInifinityRecomendedMovies = (id: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_RECOMENDED_MOVIES],
+    queryFn:()=> getMovieRecomendationById({id:id}),
+  });
+};
+
 export const useGetMovieById = ({ id }: { id: string }) => {
   return useQuery<MovieDetaile>({
     queryKey: [QUERY_KEYS.GET_MOVIE_BY_ID],
@@ -90,20 +98,20 @@ export const useGetSeriesById = ({ id }: { id: string }) => {
 export const useGetCreditByMovieId = ({ id }: { id: string }) => {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_MOVIE_CREDITS_BY_ID],
-    queryFn: () =>  getMovieCreditById(id),
+    queryFn: () => getMovieCreditById(id),
   });
 };
 
 export const useGetImageByMovieId = ({ id }: { id: string }) => {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_MOVIE_Image_BY_ID],
-    queryFn: () =>  getMovieImagesById(id),
+    queryFn: () => getMovieImagesById(id),
   });
 };
 
 export const useGetVideoByMovieId = ({ id }: { id: string }) => {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_MOVIE_VIDEO_BY_ID],
-    queryFn: () =>  getMovieVideoById(id),
+    queryFn: () => getMovieVideoById(id),
   });
 };

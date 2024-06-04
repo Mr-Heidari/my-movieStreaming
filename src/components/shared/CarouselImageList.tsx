@@ -20,7 +20,7 @@ const CarouselImageList = ({ item, type }: props) => {
     <div className="mx-2">
       <>
         <main>
-          <Swiper slidesPerView={"auto"} slidesPerGroup={4} spaceBetween={20}>
+          <Swiper slidesPerView={1} slidesPerGroup={1} spaceBetween={20}>
             <SwiperButtons></SwiperButtons>
             {item &&
               item.map((image) => (

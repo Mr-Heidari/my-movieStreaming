@@ -13,7 +13,7 @@
 .section::-webkit-scrollbar {
   width: 20px;
   height: 10px;
-  background-color: wheat;
+  background-color: white;
   border-radius: 10px;
 }
 

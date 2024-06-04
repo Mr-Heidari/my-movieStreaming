@@ -171,11 +171,29 @@ export async function getMovieVideoById(id: string) {
     const images = await fetch(
       `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`,
       options
-    ).then((response) => response.json()).then((json)=>json.results);
+    )
+      .then((response) => response.json())
+      .then((json) => json.results);
 
     if (!images) throw Error;
 
     return images;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getMovieRecomendationById({id}:{id:string}) {
+  try {
+    const recomended = await fetch(
+      `https://api.themoviedb.org/3/movie/${id}/recommendations?language=en-US&page=1`,
+      options
+    )
+      .then((respons) => respons.json())
+    console.log(recomended);
+    if (!recomended) throw Error;
+
+    return recomended;
   } catch (error) {
     console.log(error);
   }

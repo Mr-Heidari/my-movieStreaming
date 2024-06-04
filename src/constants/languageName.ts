@@ -1,0 +1,1 @@
+export const languageName = new Intl.DisplayNames("en", { type: 'language' });
