@@ -40,6 +40,7 @@ const Loading = () => {
     </div>
   );
 };
+
 const MovieDetails = () => {
   const { id } = useParams();
 

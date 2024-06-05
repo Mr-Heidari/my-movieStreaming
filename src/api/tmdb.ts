@@ -44,7 +44,7 @@ export async function getInifinityPopulareMovies({ pageParam = 1 }) {
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const populare: any = await fetch(
-      `https://api.themoviedb.org/3/movie/popular?page=${pageParam}`,
+      `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${pageParam}`,
       options
     ).then((response) => response.json());
 
@@ -259,6 +259,150 @@ export async function getSeriesRecomendationById({ id }: { id: string }) {
     if (!recomended) throw Error;
 
     return recomended;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getNowPlayingMovies({ pageParam = 1 }) {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const nowPlaying: any = await fetch(
+      `https://api.themoviedb.org/3/movie/now_playing?page=${pageParam}`,
+      options
+    ).then((response) => response.json());
+
+    if (!nowPlaying) throw Error;
+    console.log(nowPlaying);
+
+    return nowPlaying;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function getTopRatedMovies({ pageParam = 1 }) {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const topRated: any = await fetch(
+      `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=${pageParam}`,
+      options
+    ).then((response) => response.json());
+
+    if (!topRated) throw Error;
+    console.log(topRated);
+
+    return topRated;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function getUpComingMovies({ pageParam = 1 }) {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const upcoming: any = await fetch(
+      `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${pageParam}`,
+      options
+    ).then((response) => response.json());
+
+    if (!upcoming) throw Error;
+    console.log(upcoming);
+
+    return upcoming;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function getMoviesByGenre({ genreid, page = 1 }) {
+  try {
+    const movies = await fetch(
+      `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&with_genres=${genreid}`,
+      options
+    ).then((response) => response.json());
+    console.log(movies);
+    if (!movies) throw Error;
+
+    return movies;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getAiringTodaySeries({ pageParam = 1 }) {
+  try {
+    const airingToday = await fetch(
+      `https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=${pageParam}`,
+      options
+    ).then((response) => response.json());
+
+    if (!airingToday) throw Error;
+
+    return airingToday;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getOnAirSeries({ pageParam = 1 }) {
+  try {
+    const onAir = await fetch(
+      `https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=${pageParam}`,
+      options
+    ).then((response) => response.json());
+
+    if (!onAir) throw Error;
+
+    return onAir;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getPopulareSeries({ pageParam = 1 }) {
+  try {
+    const populare = await fetch(
+      `https://api.themoviedb.org/3/tv/popular?language=en-US&page=${pageParam}`,
+      options
+    ).then((response) => response.json());
+
+    if (!populare) throw Error;
+
+    return populare;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getTopRatedSeries({ pageParam = 1 }) {
+  try {
+    const topRated = await fetch(
+      `https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=${pageParam}`,
+      options
+    ).then((response) => response.json());
+
+    if (!topRated) throw Error;
+
+    return topRated;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getSeriesByGenre({ genreid, page = 1 }) {
+  try {
+    const series = await fetch(
+      `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=${page}&sort_by=popularity.desc&with_genres=${genreid}`,
+      options
+    ).then((response) => response.json());
+    console.log(series);
+    if (!series) throw Error;
+
+    return series;
   } catch (error) {
     console.log(error);
   }

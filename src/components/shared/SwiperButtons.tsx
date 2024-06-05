@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSwiper } from "swiper/react";
 
 const SwiperButtons = () => {
   const swiper = useSwiper();
   const [swiperIsEnd, setSWiperIsEnd] = useState<boolean>();
   const [swiperIsBeginning, setSwiperIsBeginning] = useState<boolean>();
+
+  useEffect(()=> {
+    setSWiperIsEnd(swiper.isEnd)
+    setSwiperIsBeginning(swiper.isBeginning)
+  })
   return (
     <div className=" max-md:hidden">
       <button

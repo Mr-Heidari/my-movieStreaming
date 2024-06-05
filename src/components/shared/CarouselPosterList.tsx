@@ -107,13 +107,7 @@ const CarouselPosterList = ({
                                 </div>
                               </div>
                               <div>
-                                <div className="p-2 w-fit h-fit absolute top-0 left-0 md:top-2 md:left-2 rounded-full">
-                                  <img
-                                    src="/assets/icons/heart.svg"
-                                    alt=""
-                                    className=" max-md:w-6 bg-black/70 p-1 rounded-full"
-                                  />
-                                </div>
+                              
                                 <div className="p-2 w-fit h-fit absolute top-0 right-0 md:top-2 md:right-2 rounded-full">
                                   <img
                                     src="/assets/icons/save.svg"

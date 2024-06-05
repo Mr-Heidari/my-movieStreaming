@@ -6,6 +6,8 @@ import Movie from "./-root/pages/Movie"
 import RootLayout from "./-root/RootLayout"
 import MovieDetails from "./-root/pages/MovieDetails"
 import SeriesDetaile from "./-root/pages/SeriesDetails"
+import MovieList from "./-root/pages/MovieList"
+import SeriesList from "./-root/pages/SeriesList"
 
 const App = () => {
   return (
@@ -20,6 +22,8 @@ const App = () => {
                 <Route path="/movies" element={<Movie/>}/>
                 <Route path="/movie/:id" element={<MovieDetails/>}/>
                 <Route path="/tv/:id" element={<SeriesDetaile/>}/>
+                <Route path="/movie/:genre/:id" element={<MovieList/>}/>
+                <Route path="/tv/:genre/:id" element={<SeriesList/>}/>
 
             </Route>
         </Routes>

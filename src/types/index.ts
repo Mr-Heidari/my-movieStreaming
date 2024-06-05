@@ -118,3 +118,7 @@ export type SeriesCredits = {
   credit_id: string;
   order: number;
 };
+
+export type page={
+  results:[]
+}
