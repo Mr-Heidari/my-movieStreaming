@@ -48,7 +48,7 @@ const Home = () => {
 
   return (
     <div className="max-md:pb-24 pb-10 pt-28">
-      <header className="  " onClick={()=>{console.log(inifinityItems?.flat(1));fetchNextPage()}}>
+      <header className="  ">
         <section className="w-full h-[350px] md:h-[500px] relative bg-black bg-gradient-to-t from-red-600">
           <img
             src="/assets/images/home-poster.jpg"
