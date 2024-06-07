@@ -97,7 +97,7 @@ const MediaCard = ({ mediaType, card }: props) => {
                           : "/assets/icons/save.svg"
                       }
                       alt=""
-                      className=" brightness-200  max-md:w-6 bg-black/70 max-md:p-1 md:p-[6px] rounded-full "
+                      className=" brightness-200  max-md:w-6 bg-black/70 max-md:p-1 md:p-[6px] rounded-full cursor-pointer"
                       onClick={(e) => handleSavePost(e)}
                     />
                   )}
