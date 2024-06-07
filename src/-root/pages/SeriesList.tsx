@@ -29,7 +29,8 @@ const SeriesList = () => {
 
   useEffect(() => {
     if (inView && hasNextPage) fetchNextPage();
-  }, [series]);
+  }, [inView]);
+  
 
   return (
     <div className="py-28 text-white mx-5">

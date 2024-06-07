@@ -1,7 +1,10 @@
 import {
+  useDeleteSavedPost,
+  useGetCurrentUser,
   useGetSeriesById,
   useGetSeriesCreditById,
   useGetSeriesRecomended,
+  useSavePost,
 } from "@/lib/react-query/queries";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { useParams } from "react-router-dom";
@@ -20,6 +23,10 @@ import { Input } from "@/components/ui/input";
 import { languageName } from "@/constants/languageName";
 import TVMediaBar from "@/components/shared/TvMediaBar";
 import RecomendedMovieList from "@/components/shared/RecomendedMovieList";
+import { useUserContext } from "@/context/AuthContext";
+import { useEffect, useState } from "react";
+import { Models } from "appwrite";
+import Loader from "@/components/shared/Loader";
 
 const Loading = () => {
   return (
@@ -42,6 +49,41 @@ const Loading = () => {
 
 const SeriesDetaile = () => {
   const { id } = useParams();
+
+  const { data: currentUser } = useGetCurrentUser();
+
+  const { user } = useUserContext();
+
+  const [isSaved, setIsSaved] = useState(false);
+
+  const { mutate: savePost, isPending: isSavingPost } = useSavePost();
+
+  const { mutate: deleteSavePost, isPending: isDeletingSaved } =
+    useDeleteSavedPost();
+
+  const savedPostRecord = currentUser?.save.find(
+    (record: Models.Document) => record?.mediaId == id
+  );
+
+  const handleSavePost = (
+    e: React.MouseEvent<HTMLImageElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
+
+    if (savedPostRecord) {
+      setIsSaved(false);
+      return deleteSavePost(savedPostRecord.$id);
+    }
+
+    //saved post id  to user collection  inside saved attribute on DB
+    savePost({ userId: user.id, mediaId: `${id}` });
+    setIsSaved(true);
+  };
+
+  useEffect(() => {
+    setIsSaved(!!savedPostRecord);
+    console.log(isSaved);
+  }, [currentUser]);
 
   const { data: seriesDetails, isLoading: isDetailLoading } = useGetSeriesById({
     id: id || "",
@@ -144,44 +186,6 @@ const SeriesDetaile = () => {
                     </div>
                     <p>User Score</p>
                   </div>
-                  <div className="flex flex-row gap-5 w-full max-sm:hidden">
-                    {/** like  */}
-                    <HoverCard>
-                      <HoverCardTrigger>
-                        <img
-                          src="/assets/icons/heart.svg"
-                          alt=""
-                          className=" max-md:w-6 w-12 bg-red-900 p-3 rounded-full brightness-200 cursor-pointer min-w-10"
-                        />
-                      </HoverCardTrigger>
-                      <HoverCardContent className="bg-red-700 w-fit p-1 px-2 border-none text-xs">
-                        Mark as favorite
-                      </HoverCardContent>
-                    </HoverCard>
-
-                    {/** save  */}
-                    <HoverCard>
-                      <HoverCardTrigger>
-                        <img
-                          src="/assets/icons/save.svg"
-                          alt=""
-                          className=" max-md:w-6 min-w-10 w-12 bg-red-900 p-3 rounded-full brightness-200 cursor-pointer"
-                          title="asghar"
-                        />
-                      </HoverCardTrigger>
-                      <HoverCardContent className="bg-red-700 w-fit p-1 px-2 border-none text-xs">
-                        Add to your watchlist
-                      </HoverCardContent>
-                    </HoverCard>
-                    <div className=" flex flex-row  w-full items-center cursor-pointer brightness-75 hover:brightness-100 transition">
-                      <img
-                        src="/assets/icons/play-icone.svg"
-                        alt=""
-                        className="w-10 h-10"
-                      />
-                      <p>Play trailer</p>
-                    </div>
-                  </div>
                   <div>
                     <h2 className="text-2xl font-semibold max-sm:text-lg">
                       Overview
@@ -251,7 +255,6 @@ const SeriesDetaile = () => {
                     Like
                   </HoverCardContent>
                 </HoverCard>
-
                 {/** dislike */}
                 <HoverCard>
                   <HoverCardTrigger>
@@ -265,18 +268,28 @@ const SeriesDetaile = () => {
                     Dislike
                   </HoverCardContent>
                 </HoverCard>
-
                 {/** save */}
                 <HoverCard>
                   <HoverCardTrigger>
-                    <img
-                      src="/assets/icons/save.svg"
-                      alt=""
-                      className="w-9 object-contain cursor-pointer hover:bg-red-700 p-1 rounded-md opacity-90"
-                    />
+                    {isSavingPost || isDeletingSaved ? (
+                      <div>
+                        <Loader width={30} height={30} />
+                      </div>
+                    ) : (
+                      <img
+                        src={
+                          isSaved
+                            ? "/assets/icons/saved.svg"
+                            : "/assets/icons/save.svg"
+                        }
+                        alt=""
+                        className="w-9 object-contain cursor-pointer hover:bg-red-700 p-1 rounded-md opacity-90"
+                        onClick={(e) => handleSavePost(e)}
+                      />
+                    )}
                   </HoverCardTrigger>
                   <HoverCardContent className="bg-red-700 px-2 w-fit border-none text-xs">
-                    add to watch list
+                    {isSaved ? "remove from watch list" : "add to watch list"}
                   </HoverCardContent>
                 </HoverCard>
               </div>

@@ -25,4 +25,5 @@ export enum QUERY_KEYS {
   GET_POPULARE_SERIES = "getPoplareSries",
   GET_Series_Creator = "getSeriesCreator",
   GET_SERIES_BY_GENRE = "getSeriesByGenre",
+  GET_CURRENT_USER='getCurrentUser'
 }

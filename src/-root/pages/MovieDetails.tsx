@@ -1,8 +1,11 @@
 import {
+  useDeleteSavedPost,
   useGetCreditByMovieId,
+  useGetCurrentUser,
   useGetInifinityRecomendedMovies,
   useGetMovieById,
   useGetMovieDirectorAndWriter,
+  useSavePost,
 
 } from "@/lib/react-query/queries";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
@@ -21,6 +24,10 @@ import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import RecomendedCarouselList from "@/components/shared/RecomendedCarouselList";
 import MediaBar from "@/components/shared/MediaBar";
+import Loader from "@/components/shared/Loader";
+import { useUserContext } from "@/context/AuthContext";
+import { useEffect, useState } from "react";
+import { Models } from "appwrite";
 
 const Loading = () => {
   return (
@@ -42,7 +49,42 @@ const Loading = () => {
 };
 
 const MovieDetails = () => {
-  const { id } = useParams();
+  const { id } = useParams()
+  
+  const { data: currentUser } = useGetCurrentUser();
+
+  const { user } = useUserContext();
+
+  const [isSaved, setIsSaved] = useState(false);
+
+  const { mutate: savePost, isPending: isSavingPost } = useSavePost();
+
+  const { mutate: deleteSavePost, isPending: isDeletingSaved } =
+    useDeleteSavedPost();
+
+  const savedPostRecord = currentUser?.save.find(
+    (record: Models.Document) => record?.mediaId == id
+  );
+
+  const handleSavePost = (
+    e: React.MouseEvent<HTMLImageElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
+
+    if (savedPostRecord) {
+      setIsSaved(false);
+      return deleteSavePost(savedPostRecord.$id);
+    }
+
+    //saved post id  to user collection  inside saved attribute on DB
+    savePost({ userId: user.id, mediaId: `${id}` });
+    setIsSaved(true);
+  };
+
+  useEffect(() => {
+    setIsSaved(!!savedPostRecord);
+    console.log('asghar');
+  }, [currentUser]);
 
   const { data: movieDetaile, isLoading: isDetailLoading } = useGetMovieById({
     id: id || "",
@@ -240,16 +282,26 @@ const MovieDetails = () => {
                 </HoverCard>
 
                 {/** save */}
+                
+              
                 <HoverCard>
                   <HoverCardTrigger>
+                  {isSavingPost || isDeletingSaved ? (
+                    <div>
+                      <Loader width={30} height={30} />{" "}
+                    </div>):
                     <img
-                      src="/assets/icons/save.svg"
+                      src={
+                        isSaved
+                          ? "/assets/icons/saved.svg"
+                          : "/assets/icons/save.svg"
+                      }
                       alt=""
                       className="w-9 object-contain cursor-pointer hover:bg-red-700 p-1 rounded-md opacity-90"
-                    />
+                    onClick={(e)=>handleSavePost(e)}/>}
                   </HoverCardTrigger>
                   <HoverCardContent className="bg-red-700 px-2 w-fit border-none text-xs">
-                    add to watch list
+                    {isSaved ? 'remove from watch list' : 'add to watch list'}
                   </HoverCardContent>
                 </HoverCard>
               </div>

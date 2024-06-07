@@ -1,6 +1,7 @@
 import CarouselPosterList from "@/components/shared/CarouselPosterList";
 import SuggestedMovieCard from "@/components/shared/SuggestedMovieCard";
 import { Input } from "@/components/ui/input";
+import { useUserContext } from "@/context/AuthContext";
 import {
   useGetAllDayTrendings,
   useGetAllWeekTrendings,
@@ -10,6 +11,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Home = () => {
+  const { isAuthenticated } = useUserContext();
 
   const [inifinityItems,setInifinityItems] =useState<object[]>()
 
@@ -41,6 +43,7 @@ const Home = () => {
   useEffect(()=>{
     console.log('assaass')
     if(popul?.pages)yetabe()
+    console.log(isAuthenticated)
   },[popul])
 
   return (

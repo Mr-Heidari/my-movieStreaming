@@ -2,9 +2,11 @@ import { Link, useLocation } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { topbarLinks } from "@/constants/barlinks";
+import { useUserContext } from "@/context/AuthContext";
 
 const TopBar = () => {
   const { pathname } = useLocation();
+  const { user}=useUserContext()
 
   return (
     <>
@@ -65,11 +67,12 @@ const TopBar = () => {
               alt=""
             />
           </section>
-
+          <Link to={`/profile/${user.id}`}>  
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarImage src={`${user.imageUrl}`} />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
+          </Link>
         </div>
       </main>
     </>

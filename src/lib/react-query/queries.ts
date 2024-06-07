@@ -1,4 +1,9 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { QUERY_KEYS } from "./queryKeys";
 import {
   getAiringTodaySeries,
@@ -26,7 +31,15 @@ import {
   getTopRatedSeries,
   getUpComingMovies,
 } from "@/api/tmdb";
-import { MovieDetaile, SeriesDetaile } from "@/types";
+import { INewUser, MovieDetaile, SeriesDetaile } from "@/types";
+import {
+  createUserAccount,
+  deleteSavedPost,
+  getCurrentUser,
+  savePost,
+  signInAccount,
+  signOutAccount,
+} from "@/api/appwrite";
 
 type Page = {
   length: number;
@@ -336,5 +349,56 @@ export const useGetSeriesByGenre = (id: string) => {
 
       return nextpage + 1;
     },
+  });
+};
+
+export const useCreateUserAccountMutation = () => {
+  return useMutation({
+    mutationFn: (user: INewUser) => createUserAccount(user),
+  });
+};
+
+export const useSignInAccount = () => {
+  return useMutation({
+    mutationFn: (user: { email: string; password: string }) =>
+      signInAccount(user),
+  });
+};
+
+export const useSignOutAccount = () => {
+  return useMutation({
+    mutationFn: signOutAccount,
+  });
+};
+
+export const useSavePost = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ userId, mediaId }: { userId: string; mediaId: string }) =>
+      savePost(userId, mediaId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_MOVIE_BY_ID],
+      });
+    },
+  });
+};
+
+export const useDeleteSavedPost = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (savedRecordId: string) => deleteSavedPost(savedRecordId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_SERIES_BY_ID],
+      });
+    },
+  });
+};
+
+export const useGetCurrentUser = () => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_CURRENT_USER],
+    queryFn: getCurrentUser,
   });
 };
