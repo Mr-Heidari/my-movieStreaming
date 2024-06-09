@@ -1,7 +1,8 @@
 import CarouselPosterList from "@/components/shared/CarouselPosterList";
 import SuggestedMovieCard from "@/components/shared/SuggestedMovieCard";
 import { Input } from "@/components/ui/input";
-import { useUserContext } from "@/context/AuthContext";
+import { useUserContext } from "@/context/useUserContext";
+
 import {
   useGetAllDayTrendings,
   useGetAllWeekTrendings,

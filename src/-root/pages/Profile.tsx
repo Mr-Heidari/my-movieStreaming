@@ -1,5 +1,5 @@
 import Loader from "@/components/shared/Loader";
-import { useUserContext } from "@/context/AuthContext";
+import { useUserContext } from "@/context/useUserContext";
 import {
   useGetCurrentUser,
   useSignOutAccount,

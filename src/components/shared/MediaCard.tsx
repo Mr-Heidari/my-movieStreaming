@@ -5,13 +5,13 @@ import { Skeleton } from "../ui/skeleton";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { Media } from "@/types";
 import {
-  useDeleteSavedPost,
+  useDeleteSavedMovie,
   useGetCurrentUser,
-  useSavePost,
+  useSaveMovie,
 } from "@/lib/react-query/queries";
 import { Models } from "appwrite";
-import { useUserContext } from "@/context/AuthContext";
 import Loader from "./Loader";
+import { useUserContext } from "@/context/useUserContext";
 
 type props = {
   card: Media;
@@ -25,10 +25,10 @@ const MediaCard = ({ mediaType, card }: props) => {
 
   const [isSaved, setIsSaved] = useState(false);
 
-  const { mutate: savePost, isPending: isSavingPost } = useSavePost();
+  const { mutate: saveMovie, isPending: isSavingMovie } = useSaveMovie();
 
-  const { mutate: deleteSavePost, isPending: isDeletingSaved } =
-    useDeleteSavedPost();
+  const { mutate: deleteSaveMovie, isPending: isDeletingSaved } =
+    useDeleteSavedMovie();
 
   const savedPostRecord = currentUser?.save.find(
     (record: Models.Document) => record?.mediaId == card?.id
@@ -41,11 +41,11 @@ const MediaCard = ({ mediaType, card }: props) => {
 
     if (savedPostRecord) {
       setIsSaved(false);
-      return deleteSavePost(savedPostRecord.$id);
+      return deleteSaveMovie(savedPostRecord.$id);
     }
 
     //saved post id  to user collection  inside saved attribute on DB
-    savePost({ userId: user.id, mediaId: `${card.id}` });
+    saveMovie({ userId: user.id, mediaId: `${card.id}` });
     setIsSaved(true);
   };
 
@@ -85,7 +85,7 @@ const MediaCard = ({ mediaType, card }: props) => {
               </Link>
               <div>
                 <div className="p-2 w-fit h-fit absolute top-0 right-0 md:top-2 md:right-2 rounded-full ">
-                  {isSavingPost || isDeletingSaved ? (
+                  {isSavingMovie || isDeletingSaved ? (
                     <div className="bg-black/70 p-2 rounded-full">
                       <Loader width={22} height={22} />{" "}
                     </div>

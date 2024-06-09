@@ -24,8 +24,8 @@ import {
   useCreateUserAccountMutation,
   useSignInAccount,
 } from "@/lib/react-query/queries";
-import { useUserContext } from "@/context/AuthContext";
 import Loader from "@/components/shared/Loader";
+import { useUserContext } from "@/context/useUserContext";
 
 const SingUp = () => {
   const [showPassword, setShowpassword] = useState(false);

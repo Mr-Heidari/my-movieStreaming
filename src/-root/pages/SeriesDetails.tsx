@@ -1,10 +1,10 @@
 import {
-  useDeleteSavedPost,
+  useDeleteSavedMovie,
   useGetCurrentUser,
   useGetSeriesById,
   useGetSeriesCreditById,
   useGetSeriesRecomended,
-  useSavePost,
+  useSaveMovie,
 } from "@/lib/react-query/queries";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { useParams } from "react-router-dom";
@@ -23,10 +23,10 @@ import { Input } from "@/components/ui/input";
 import { languageName } from "@/constants/languageName";
 import TVMediaBar from "@/components/shared/TvMediaBar";
 import RecomendedMovieList from "@/components/shared/RecomendedMovieList";
-import { useUserContext } from "@/context/AuthContext";
 import { useEffect, useState } from "react";
 import { Models } from "appwrite";
 import Loader from "@/components/shared/Loader";
+import { useUserContext } from "@/context/useUserContext";
 
 const Loading = () => {
   return (
@@ -56,10 +56,10 @@ const SeriesDetaile = () => {
 
   const [isSaved, setIsSaved] = useState(false);
 
-  const { mutate: savePost, isPending: isSavingPost } = useSavePost();
+  const { mutate: saveMovie, isPending: isSavingMovie } = useSaveMovie();
 
-  const { mutate: deleteSavePost, isPending: isDeletingSaved } =
-    useDeleteSavedPost();
+  const { mutate: deleteSaveMovie, isPending: isDeletingSaved } =
+  useDeleteSavedMovie();
 
   const savedPostRecord = currentUser?.save.find(
     (record: Models.Document) => record?.mediaId == id
@@ -72,11 +72,11 @@ const SeriesDetaile = () => {
 
     if (savedPostRecord) {
       setIsSaved(false);
-      return deleteSavePost(savedPostRecord.$id);
+      return deleteSaveMovie(savedPostRecord.$id);
     }
 
     //saved post id  to user collection  inside saved attribute on DB
-    savePost({ userId: user.id, mediaId: `${id}` });
+    saveMovie({ userId: user.id, mediaId: `${id}` });
     setIsSaved(true);
   };
 
@@ -271,7 +271,7 @@ const SeriesDetaile = () => {
                 {/** save */}
                 <HoverCard>
                   <HoverCardTrigger>
-                    {isSavingPost || isDeletingSaved ? (
+                    {isSavingMovie || isDeletingSaved ? (
                       <div>
                         <Loader width={30} height={30} />
                       </div>

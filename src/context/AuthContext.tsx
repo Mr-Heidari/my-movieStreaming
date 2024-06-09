@@ -1,17 +1,10 @@
 import { getCurrentUser } from "@/api/appwrite";
+import { INITIAL_USER } from "@/constants/initialUser";
 import { IContextType, IUser } from "@/types";
-import React, { useContext, createContext, useEffect, useState } from "react";
+import React, {createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const INITIAL_USER = {
-  id: "",
-  name: "",
-  username: "",
-  email: "",
-  imageUrl: "",
-  bio: "",
-  isSkippedPersonalizationForm: false,
-};
+
 
 //check every moment is user logged in or not
 const INITIALSTATE = {
@@ -23,7 +16,7 @@ const INITIALSTATE = {
   checkAuthUser: async () => false as boolean,
 };
 
-const AuthContext = createContext<IContextType>(INITIALSTATE);
+export const AuthContext = createContext<IContextType>(INITIALSTATE);
 
 //we want all of our entire app know user is logged in or not
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
@@ -88,4 +81,4 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 export default AuthProvider;
 
-export const useUserContext = () => useContext(AuthContext);
+

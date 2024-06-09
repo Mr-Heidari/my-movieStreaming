@@ -34,9 +34,9 @@ import {
 import { INewUser, MovieDetaile, SeriesDetaile } from "@/types";
 import {
   createUserAccount,
-  deleteSavedPost,
+  deleteSavedMovie,
   getCurrentUser,
-  savePost,
+  saveMovie,
   signInAccount,
   signOutAccount,
 } from "@/api/appwrite";
@@ -371,11 +371,11 @@ export const useSignOutAccount = () => {
   });
 };
 
-export const useSavePost = () => {
+export const useSaveMovie = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({ userId, mediaId }: { userId: string; mediaId: string }) =>
-      savePost(userId, mediaId),
+      saveMovie(userId, mediaId),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_MOVIE_BY_ID],
@@ -384,10 +384,10 @@ export const useSavePost = () => {
   });
 };
 
-export const useDeleteSavedPost = () => {
+export const useDeleteSavedMovie = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (savedRecordId: string) => deleteSavedPost(savedRecordId),
+    mutationFn: (savedRecordId: string) => deleteSavedMovie(savedRecordId),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_SERIES_BY_ID],

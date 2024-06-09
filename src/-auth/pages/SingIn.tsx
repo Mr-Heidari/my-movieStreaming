@@ -20,9 +20,9 @@ import { Link, useNavigate } from "react-router-dom";
 // import { useSignInAccount } from "@/lib/reat-query/queriesAndMutation";
 // import { useUserContext } from "@/context/AuthContext";
 import { useState } from "react";
-import { useUserContext } from "@/context/AuthContext";
 import { useSignInAccount } from "@/lib/react-query/queries";
 import Loader from "@/components/shared/Loader";
+import { useUserContext } from "@/context/useUserContext";
 
 const SingIn = () => {
   const [showPassword, setShowpassword] = useState(false);

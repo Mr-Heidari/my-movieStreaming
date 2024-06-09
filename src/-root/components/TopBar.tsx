@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { topbarLinks } from "@/constants/barlinks";
-import { useUserContext } from "@/context/AuthContext";
+import { useUserContext } from "@/context/useUserContext";
 
 const TopBar = () => {
   const { pathname } = useLocation();

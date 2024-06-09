@@ -92,48 +92,48 @@ export async function getCurrentUser() {
 }
 
 export async function signOutAccount() {
-    try {
-      const session = await account.deleteSession("current");
-  
-      localStorage.removeItem('cookieFallback')
-      return session;
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  try {
+    const session = await account.deleteSession("current");
 
-  export async function savePost(userId: string, mediaId: string) {
-    try {
-      const updatedPost = await databases.createDocument(
-        appwriteConfig.databaseId,
-        appwriteConfig.savesCollectionId,
-        ID.unique(),
-        {
-          users: userId,
-          mediaId: mediaId,
-        }
-      );
-  
-      if (!updatedPost) throw Error;
-  
-      return updatedPost;
-    } catch (error) {
-      console.log(error);
-    }
+    localStorage.removeItem("cookieFallback");
+    return session;
+  } catch (error) {
+    console.log(error);
   }
+}
 
-  export async function deleteSavedPost(savedRecordId: string) {
-    try {
-      const statusCode = await databases.deleteDocument(
-        appwriteConfig.databaseId,
-        appwriteConfig.savesCollectionId,
-        savedRecordId
-      );
-  
-      if (!statusCode) throw Error;
-  
-      return { status: "Ok" };
-    } catch (error) {
-      console.log(error);
-    }
+export async function saveMovie(userId: string, mediaId: string) {
+  try {
+    const updatedPost = await databases.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.savesCollectionId,
+      ID.unique(),
+      {
+        users: userId,
+        mediaId: mediaId,
+      }
+    );
+
+    if (!updatedPost) throw Error;
+
+    return updatedPost;
+  } catch (error) {
+    console.log(error);
   }
+}
+
+export async function deleteSavedMovie(savedRecordId: string) {
+  try {
+    const statusCode = await databases.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.savesCollectionId,
+      savedRecordId
+    );
+
+    if (!statusCode) throw Error;
+
+    return { status: "Ok" };
+  } catch (error) {
+    console.log(error);
+  }
+}
