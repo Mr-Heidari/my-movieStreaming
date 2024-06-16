@@ -45,13 +45,21 @@ const MediaCard = ({ mediaType, card }: props) => {
     }
 
     //saved post id  to user collection  inside saved attribute on DB
-    saveMovie({ userId: user.id, mediaId: `${card.id}` });
+    saveMovie({
+      userId: user.id,
+      mediaId: `${card?.id}`,
+      mediaName: card?.title
+        ? card?.title
+        : card?.original_title
+        ? card?.original_title
+        : card?.name,
+      imageUrl: card ? card.poster_path : "",
+    });
     setIsSaved(true);
   };
 
   useEffect(() => {
     setIsSaved(!!savedPostRecord);
-    console.log('asghar');
   }, [currentUser]);
 
   return (

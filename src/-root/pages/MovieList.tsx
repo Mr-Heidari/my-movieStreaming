@@ -1,3 +1,4 @@
+import Loader from "@/components/shared/Loader";
 import MediaCard from "@/components/shared/MediaCard";
 
 import { Skeleton } from "@/components/ui/skeleton";
@@ -19,6 +20,7 @@ const MovieList = () => {
     data: Movies,
     fetchNextPage,
     hasNextPage,
+    isPending,
   } = useGetMoviesByGenre(id || "");
 
   const movieItems = useMemo(() => {
@@ -36,24 +38,30 @@ const MovieList = () => {
       <header className="mb-5">
         <h1 className="md:text-2xl font-semibold">{genre}</h1>
       </header>
-      <main>
-        <section className="flex flex-row flex-wrap gap-3  justify-center">
-          {movieItems?.map((movie: Media) => (
-            <MediaCard card={movie} mediaType="movie"></MediaCard>
-          ))}
-          {hasNextPage && (
-            <div ref={ref}>
-              <Skeleton className="min-w-[100px] h-[150px] md:min-w-[200px] md:h-[300px] bg-neutral-600 flex">
-                <img
-                  src="/assets/icons/Spinner-2.gif"
-                  alt=""
-                  className=" m-auto w-10 h-10"
-                />
-              </Skeleton>
-            </div>
-          )}
-        </section>
-      </main>
+      {isPending ? (
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <Loader width={30} height={30}></Loader>
+        </div>
+      ) : (
+        <main>
+          <section className="flex flex-row flex-wrap gap-3  justify-center">
+            {movieItems?.map((movie: Media) => (
+              <MediaCard card={movie} mediaType="movie"></MediaCard>
+            ))}
+            {hasNextPage && (
+              <div ref={ref}>
+                <Skeleton className="min-w-[100px] h-[150px] md:min-w-[200px] md:h-[300px] bg-neutral-600 flex">
+                  <img
+                    src="/assets/icons/Spinner-2.gif"
+                    alt=""
+                    className=" m-auto w-10 h-10"
+                  />
+                </Skeleton>
+              </div>
+            )}
+          </section>
+        </main>
+      )}
     </div>
   );
 };
