@@ -1,86 +1,41 @@
-// import {
-//   useDeleteSavedPost,
-//   useGetCurrentUser,
-//   useGetMovieById,
-//   useGetSeriesById,
-//   useSavePost,
-// } from "@/lib/react-query/queries";
-// import { useEffect, useState } from "react";
-// import Loader from "./Loader";
-// import { Link } from "lucide-react";
-// import { Card, CardContent } from "../ui/card";
-// import { Skeleton } from "../ui/skeleton";
-// import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-// import { Models } from "appwrite";
-// import { useUserContext } from "@/context/AuthContext";
-// import { useParams } from "react-router-dom";
-// import { getMovieById } from "@/api/tmdb";
+import { useGetMovieById } from "@/lib/react-query/queries";
+import { Link } from "react-router-dom";
 
-// type props = {
-//   mediaId: string;
-// };
-// const SavedMediaCard = ({ mediaId }: props) => {
-//   const { id } = useParams();
+type mediaDetail = {
+  imageUrl: string;
+  mediaName: string;
+  mediaId: string;
+};
 
-//   const { data: currentUser } = useGetCurrentUser();
+const SavedMediaCard = ({ imageUrl, mediaId, mediaName }: mediaDetail) => {
+    const { data: movieDetaile} = useGetMovieById({
+        id: mediaId,
+      });
+  return (
+    <>
+      <section className="max-w-fit text-center">
+        <Link to={ `/${movieDetaile? 'movie' : 'tv'}/${mediaId}`
+                }>
+          <div className="relative">
+            <img
+              src={`https://image.tmdb.org/t/p/w500${imageUrl}`}
+              className="min-w-[100px] h-[150px] md:min-w-[200px] md:h-[300px] rounded-md  hover:bg-gradient-to-t hover:from-black"
+              alt=""
+            />
+            <div className="h-full w-full absolute bottom-0 opacity-0 hover:opacity-100 hover:bg-gradient-to-t hover:from-black/70  flex">
+              <img
+                className="m-auto w-10 h-10 md:w-16  md:h-16 opacity-75 bg-black rounded-full p-2"
+                src="/assets/icons/right-arrow.svg"
+              />
+            </div>
+          </div>
+        </Link>
+        <p className="max-w-[100px] md:max-w-[200px] max-md:text-xs line-clamp-2 text-ellipsis">
+          {mediaName}
+        </p>
+      </section>
+    </>
+  );
+};
 
-//   const { user } = useUserContext();
-
-//   const [isSaved, setIsSaved] = useState(false);
-
-//   const { mutate: savePost, isPending: isSavingPost } = useSavePost();
-
-//   const { mutate: deleteSavePost, isPending: isDeletingSaved } =
-//     useDeleteSavedPost();
-
-// //   const savedPostRecord = currentUser?.save.find(
-// //     (record: Models.Document) => record?.mediaId == id
-// //   );
-
-// //   const handleSavePost = (
-// //     e: React.MouseEvent<HTMLImageElement, MouseEvent>
-// //   ) => {
-// //     e.stopPropagation();
-
-// //     if (savedPostRecord) {
-// //       setIsSaved(false);
-// //       return deleteSavePost(savedPostRecord.$id);
-// //     }
-
-// //     //saved post id  to user collection  inside saved attribute on DB
-// //     savePost({ userId: user.id, mediaId: `${id}` });
-// //     setIsSaved(true);
-// //   };
-
-//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//   const [card, setCard] = useState<any>();
-
-// //   const { data: movie} = useGetMovieById({
-// //     id: mediaId,
-// //   });
-//   const { data: series} = useGetSeriesById({
-//     id: mediaId,
-//   });
-//   const movie = getMovieById( mediaId)
-
-// //   useEffect(() => {
-// //     if (!movie) {
-// //       setCard(series);
-// //     } else if (!series) {
-// //       setCard(movie);
-// //     }
-// //   }, []);
-
-// //   useEffect(() => {
-// //     setIsSaved(!!savedPostRecord);
-// //     console.log('asghar');
-// //   }, [currentUser]);
-
-//   if (!movie && !series) return <></>;
-
-//   return (
-//   <div><p>{movie?.id}</p></div>
-//   );
-// };
-
-// export default SavedMediaCard;
+export default SavedMediaCard;

@@ -113,7 +113,6 @@ export async function saveMovie(userId: string, mediaId: string , mediaName:stri
         mediaId: mediaId,
         mediaName: mediaName,
         imageUrl:imageUrl,
-
       }
     );
 

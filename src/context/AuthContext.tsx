@@ -1,10 +1,8 @@
 import { getCurrentUser } from "@/api/appwrite";
 import { INITIAL_USER } from "@/constants/initialUser";
 import { IContextType, IUser } from "@/types";
-import React, {createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-
 
 //check every moment is user logged in or not
 const INITIALSTATE = {
@@ -44,8 +42,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
         return true;
       }
-
-      localStorage.removeItem("cookieFallback");
+      console.log('im here')
       return false;
     } catch (error) {
       console.log(error);
@@ -60,8 +57,9 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     if (
       localStorage.getItem("cookieFallback") === "[]" ||
       localStorage.getItem("cookieFallback") === null
-    )
+    ) {
       navigate("/sing-in");
+    }
 
     checkAuthUser();
   }, []);
@@ -80,5 +78,3 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default AuthProvider;
-
-

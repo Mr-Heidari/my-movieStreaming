@@ -391,7 +391,7 @@ export const useSaveMovie = () => {
       mediaId: string;
       imageUrl: string;
       mediaName: string;
-    }) => saveMovie(userId, mediaId, imageUrl, mediaName),
+    }) => saveMovie(userId, mediaId, mediaName,imageUrl),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_MOVIE_BY_ID],

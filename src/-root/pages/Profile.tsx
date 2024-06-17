@@ -1,4 +1,5 @@
 import Loader from "@/components/shared/Loader";
+import SavedMediaCard from "@/components/shared/SavedMediaCard";
 import { useUserContext } from "@/context/useUserContext";
 import {
   useGetCurrentUser,
@@ -65,9 +66,13 @@ const Profile = () => {
         <section>
           {" "}
           <h2 className="md:text-2xl  font-semibold my-5">Watch List </h2>
-          <div className=" w-full flex flex-col gap-5">
+          <div className=" w-full flex flex-row flex-wrap gap-5">
             {currentUser?.save.map((media) => (
-              <p>{media.mediaId}</p>
+              <SavedMediaCard
+                imageUrl={media.imageUrl}
+                mediaId={media.mediaId}
+                mediaName={media.mediaName}
+              ></SavedMediaCard>
             ))}
           </div>
         </section>
