@@ -64,10 +64,11 @@ const Home = () => {
                 now.
               </p>
             </h1>
+            <Link to={'/search'}>
             <Input
               placeholder="Serach for movies , tvshow ..."
               className="text-white placeholder:text-white/50 mt-2 md:mt-10 w-full"
-            />
+            /></Link>
           </section>
           <section className="absolute bottom-0 h-24  md:h-40 bg-red-700/90 w-full px-10 text-white flex ">
             <div className="max-md:my-auto max-md:h-20">
