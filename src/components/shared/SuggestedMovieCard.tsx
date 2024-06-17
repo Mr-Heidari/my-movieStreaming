@@ -1,6 +1,7 @@
 import { movieGenreIds } from "@/constants/genresId";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { Skeleton } from "../ui/skeleton";
+import { Link } from "react-router-dom";
 
 type prop = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -19,9 +20,19 @@ const SuggestedMovieCard = ({ item, loader }: prop) => {
   };
 
   return (
-    <main className="cursor-pointer h-[200px] md:h-[300px] bg-neutral-800 flex flex-row gap-2 sm:gap-5 mx-2 md:mx-20 rounded-lg overflow-hidden border-2 border-black/70  relative max-[480px]:justify-between">
+    <Link
+      to={`/${item?.results[0].media_type}/${item?.results[0].id}`}
+      className="cursor-pointer h-[200px] md:h-[300px] bg-neutral-800 flex flex-row gap-2 sm:gap-5 mx-2 md:mx-20 rounded-lg overflow-hidden border-2 border-black/70  relative max-[480px]:justify-between"
+    >
       {loader ? (
-        <Skeleton className="w-full h-full bg-neutral-600 flex "> <img src="./assets/icons/Spinner-2.gif" alt=""  className="m-auto"/> </Skeleton>
+        <Skeleton className="w-full h-full bg-neutral-600 flex ">
+          {" "}
+          <img
+            src="./assets/icons/Spinner-2.gif"
+            alt=""
+            className="m-auto"
+          />{" "}
+        </Skeleton>
       ) : (
         <>
           <section>
@@ -125,6 +136,7 @@ const SuggestedMovieCard = ({ item, loader }: prop) => {
               </button>
             </div>
           </section>
+
           {/* <section className="md:hidden max-sm:hidden text-white line-clamp-2 text-ellipsis text-xs w-full bg-red-300"> <p >
       {item?.results[0].overview}
             </p></section> */}
@@ -133,7 +145,7 @@ const SuggestedMovieCard = ({ item, loader }: prop) => {
           </button>
         </>
       )}
-    </main>
+    </Link>
   );
 };
 

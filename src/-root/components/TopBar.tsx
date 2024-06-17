@@ -1,12 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Input } from "@/components/ui/input";
 import { topbarLinks } from "@/constants/barlinks";
 import { useUserContext } from "@/context/useUserContext";
 
 const TopBar = () => {
   const { pathname } = useLocation();
-  const { user}=useUserContext()
+  const { user } = useUserContext();
 
   return (
     <>
@@ -21,10 +20,11 @@ const TopBar = () => {
 
           <nav className="hidden md:block">
             <ul className=" flex flex-row gap-4">
-              {topbarLinks.map((link,index) => {
+              {topbarLinks.map((link, index) => {
                 const isActive = pathname === link.route;
                 return (
-                  <Link key={index}
+                  <Link
+                    key={index}
                     to={link.route}
                     className={
                       "topbar-links" +
@@ -41,37 +41,20 @@ const TopBar = () => {
           </nav>
         </section>
         <div className="flex flex-row gap-2">
-          <section className="flex flex-row border-2 border-white/30 rounded-3xl px-2 items-center  max-lg:hidden">
+          <Link to={'/search'} className="flex flex-row border-2 border-white/30 rounded-3xl p-1 items-center  ">
             {" "}
-            <Input
-              id="searchInput"
-              placeholder="search for movies"
-              className="border-none placeholder:text-white/70 text-white text-xs  h-8"
-            />
-            <label htmlFor="searchInput" className="cursor-pointer">
-              <img
-                src="/assets/icons/search-icone.svg
-          "
-                className="opacity-60 w-8 h-8"
-                alt=""
-              />
-            </label>
-          </section>
-
-          {/** search mobile version */}
-          <section className="lg:hidden">
             <img
               src="/assets/icons/search-icone.svg
           "
-              className="opacity-60 w-8 h-8 mt-1 "
+              className="opacity-60 w-8 h-8"
               alt=""
             />
-          </section>
-          <Link to={`/profile/${user.id}`}>  
-          <Avatar>
-            <AvatarImage src={`${user.imageUrl}`} />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
+          </Link>
+          <Link to={`/profile/${user.id}`}>
+            <Avatar>
+              <AvatarImage src={`${user.imageUrl}`} />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
           </Link>
         </div>
       </main>

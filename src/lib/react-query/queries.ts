@@ -21,6 +21,7 @@ import {
   getNowPlayingMovies,
   getOnAirSeries,
   getPopulareSeries,
+  getSerachedMedia,
   getSerieById,
   getSeriesByGenre,
   getSeriesCreditById,
@@ -416,5 +417,27 @@ export const useGetCurrentUser = () => {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_CURRENT_USER],
     queryFn: getCurrentUser,
+  });
+};
+
+export const useGetSearchedMedia = (searchValue: string) => {
+  return useInfiniteQuery<Page, Error>({
+    queryKey: [QUERY_KEYS.GET_SEARCHED_MEDIA,searchValue],
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore: Unreachable code error
+    queryFn: ({ pageParam = 1 }: { pageParam: number }) => {
+      return getSerachedMedia({ searchValue: searchValue, pageParam: pageParam });
+    },
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    getNextPageParam: (lastPage: Page) => {
+      if (lastPage && lastPage.length === 0) {
+        console.log("asghar");
+        return null;
+      }
+
+      const nextpage = lastPage?.page;
+
+      return nextpage + 1;
+    },
   });
 };

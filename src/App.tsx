@@ -13,6 +13,7 @@ import AuthLayout from "./-auth/AuthLayout";
 import { Toaster } from "./components/ui/toaster";
 import SingUp from "./-auth/pages/SignUp";
 import Profile from "./-root/pages/Profile";
+import Search from "./-root/pages/Search";
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
             <Route path="/movie/:genre/:id" element={<MovieList />} />
             <Route path="/tv/:genre/:id" element={<SeriesList />} />
             <Route path="/profile/:id" element={<Profile />} />
+            <Route path="/search" element={<Search />} />
           </Route>
         </Routes>
       </main>

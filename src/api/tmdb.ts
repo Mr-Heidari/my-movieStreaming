@@ -407,3 +407,22 @@ export async function getSeriesByGenre({ genreid, page = 1 }) {
     console.log(error);
   }
 }
+
+export async function getSerachedMedia({
+  pageParam=1,
+  searchValue,
+}: {
+  pageParam: number;
+  searchValue: string;
+}) {
+  try {
+    const searchData = await fetch(
+      `https://api.themoviedb.org/3/search/multi?query=${searchValue}&include_adult=false&language=en-US&page=${pageParam}`,
+      options
+    ).then((response) => response.json());
+    console.log(searchData)
+    return searchData;
+  } catch (error) {
+    console.log(error);
+  }
+}
