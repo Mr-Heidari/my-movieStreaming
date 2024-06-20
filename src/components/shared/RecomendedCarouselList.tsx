@@ -12,10 +12,10 @@ const RecomendedCarouselList = ({ item ,type}: { item: any; type:string }) => {
           <section className="flex flex-row max-w-full overflow-x-auto section p-2 gap-5 max-md:no-scrollbar">
             {item?.results.slice(0, 8).map((movie) => (
               <Link to={`/${type}/${movie.id}`}>
-                <div className="max-w-fit p-0 text-white flex flex-row gap-5 relative w-[300px]">
+                <div className="max-w-fit p-0 text-white flex flex-row gap-5 relative ">
                   <Card className=" border-4 border-black/50  ">
                     <CardContent className=" p-0 relative ">
-                      <div className="relative">
+                      <div className="relative w-[300px] h-[200px]">
                         <img
                           src={`https://image.tmdb.org/t/p/w500${movie?.backdrop_path}`}
                           className="w-full h-full rounded-sm object-cover"
