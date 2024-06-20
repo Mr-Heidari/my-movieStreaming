@@ -1,20 +1,17 @@
-import { useGetMovieById } from "@/lib/react-query/queries";
 import { Link } from "react-router-dom";
 
 type mediaDetail = {
   imageUrl: string;
   mediaName: string;
   mediaId: string;
+  type:string
 };
 
-const SavedMediaCard = ({ imageUrl, mediaId, mediaName }: mediaDetail) => {
-    const { data: movieDetaile} = useGetMovieById({
-        id: mediaId,
-      });
+const SavedMediaCard = ({ imageUrl, mediaId, mediaName,type }: mediaDetail) => {
   return (
     <>
       <section className="max-w-fit text-center">
-        <Link to={ `/${movieDetaile? 'movie' : 'tv'}/${mediaId}`
+        <Link to={ `/${type}/${mediaId}`
                 }>
           <div className="relative">
             <img

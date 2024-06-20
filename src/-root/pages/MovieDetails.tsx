@@ -104,6 +104,7 @@ const MovieDetails = () => {
       mediaId: `${id}`,
       mediaName: movieDetaile ? movieDetaile.original_title : " ",
       imageUrl: movieDetaile ? movieDetaile.poster_path : "",
+      type:'movie'
     });
     setIsSaved(true);
   };

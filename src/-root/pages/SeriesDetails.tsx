@@ -98,6 +98,7 @@ const SeriesDetaile = () => {
       mediaId: `${id}`,
       mediaName: seriesDetails ? seriesDetails.original_name : " ",
       imageUrl: seriesDetails ? seriesDetails.poster_path : "",
+      type: 'tv',
     });
     setIsSaved(true);
   };

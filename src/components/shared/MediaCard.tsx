@@ -54,6 +54,7 @@ const MediaCard = ({ mediaType, card }: props) => {
         ? card?.original_title
         : card?.name,
       imageUrl: card ? card.poster_path : "",
+      type: mediaType ? mediaType: card.media_type ,
     });
     setIsSaved(true);
   };

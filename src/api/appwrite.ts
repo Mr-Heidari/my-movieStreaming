@@ -102,7 +102,7 @@ export async function signOutAccount() {
   }
 }
 
-export async function saveMovie(userId: string, mediaId: string , mediaName:string ,imageUrl:string ) {
+export async function saveMovie(userId: string, mediaId: string , mediaName:string ,imageUrl:string,type:string ) {
   try {
     const updatedPost = await databases.createDocument(
       appwriteConfig.databaseId,
@@ -113,6 +113,7 @@ export async function saveMovie(userId: string, mediaId: string , mediaName:stri
         mediaId: mediaId,
         mediaName: mediaName,
         imageUrl:imageUrl,
+        Type:type
       }
     );
 

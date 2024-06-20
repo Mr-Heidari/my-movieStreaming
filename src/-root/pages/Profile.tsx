@@ -87,6 +87,7 @@ const Profile = () => {
                 imageUrl={media.imageUrl}
                 mediaId={media.mediaId}
                 mediaName={media.mediaName}
+                type={media.Type}
               ></SavedMediaCard>
             ))}
           </div>
