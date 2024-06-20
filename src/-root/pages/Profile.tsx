@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
-  const { user } = useUserContext();
+  const { user, setIsAuthenticated,setUser } = useUserContext();
 
   const { data: currentUser } = useGetCurrentUser();
 
@@ -17,9 +17,14 @@ const Profile = () => {
 
   const navigate = useNavigate();
 
+  const handleSingOutClientSide = async () => {
+    if (isSuccess) {
+      navigate("/");
+    }
+  };
   useEffect(() => {
-    if (isSuccess) navigate(0);
-  }, [isSuccess]);
+    handleSingOutClientSide();
+  }, [isPending]);
 
   return (
     <div className="py-28 px-[2%] md:px-[10%] text-white/90 w-full">
@@ -38,9 +43,19 @@ const Profile = () => {
               <strong className="text-red-800">Email</strong> : {user.email}
             </p>
           </div>
-          <section
+          <button
             className=" bg-red-900 h-fit p-2 px-4 rounded-md cursor-pointer hover:scale-110 transition"
-            onClick={() => signOutAccount()}
+            onClick={() => {
+              signOutAccount();
+              setIsAuthenticated(false);
+              setUser({
+                id:'',
+                name:'',
+                username: '',
+                email: '',
+                imageUrl: '',
+              });
+            }}
           >
             {isPending ? (
               <div>
@@ -56,7 +71,7 @@ const Profile = () => {
                 />
               </>
             )}
-          </section>
+          </button>
         </div>
       </header>
 

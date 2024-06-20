@@ -80,13 +80,15 @@ const SingIn = () => {
       <Form {...form} >
         <div className=" relative px-10 justify-center items-center bg-black/80 max-sm:w-[300px] sm:max-w-[420px] m-auto flex flex-col p-5 rounded-md  ">
           <header className=" flex  w-full">
+            <Link to={'/'} className=" mx-auto">
             <img
               src="/assets/images/logo.png"
               width={80}
               height={80}
               alt=""
-              className=" object-cover  mx-auto "
+              className=" object-cover  "
             />
+            </Link>
           </header>
 
           <h2 className="font-bold max-sm:text-xl sm:text-xl pt-5 ">

@@ -52,7 +52,7 @@ const SeriesDetaile = () => {
 
   const { data: currentUser } = useGetCurrentUser();
 
-  const { user } = useUserContext();
+  const { user,isAuthenticated } = useUserContext();
 
   const [isSaved, setIsSaved] = useState(false);
 
@@ -283,7 +283,7 @@ const SeriesDetaile = () => {
                               : "/assets/icons/save.svg"
                           }
                           alt=""
-                          className="w-9 object-contain cursor-pointer hover:bg-red-700 p-1 rounded-md opacity-90"
+                          className={`w-9 object-contain cursor-pointer hover:bg-red-700 p-1 rounded-md opacity-90 ${!isAuthenticated && 'hidden'}`}
                           onClick={(e) => handleSavePost(e)}
                         />
                       )}

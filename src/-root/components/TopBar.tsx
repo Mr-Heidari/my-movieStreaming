@@ -1,11 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { topbarLinks } from "@/constants/barlinks";
 import { useUserContext } from "@/context/useUserContext";
 
 const TopBar = () => {
   const { pathname } = useLocation();
-  const { user } = useUserContext();
+  const { user,isLoading,isAuthenticated } = useUserContext();
 
   return (
     <>
@@ -50,11 +49,8 @@ const TopBar = () => {
               alt=""
             />
           </Link>
-          <Link to={`/profile/${user.id}`}>
-            <Avatar>
-              <AvatarImage src={`${user.imageUrl}`} />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
+          <Link to={isAuthenticated? isLoading ? '':`/profile/${user.id}`:'/sing-in'}>
+              <img src={isLoading? '/assets/icons/Spinner-2.gif' : `${user.imageUrl}` || '/assets/icons/person-Icone.svg'} className="w-11 h-11 rounded-full border-2 border-white/60"/>
           </Link>
         </div>
       </main>

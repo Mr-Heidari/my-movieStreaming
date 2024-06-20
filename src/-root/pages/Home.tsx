@@ -70,7 +70,7 @@ const Home = () => {
               className="text-white placeholder:text-white/50 mt-2 md:mt-10 w-full"
             /></Link>
           </section>
-          <section className="absolute bottom-0 h-24  md:h-40 bg-red-700/90 w-full px-10 text-white flex ">
+          <section className="absolute bottom-0 h-24  md:h-40 bg-red-800 w-full px-10 text-white flex ">
             <div className="max-md:my-auto max-md:h-20">
               <img
                 src="/assets/images/oscars-logo.png"

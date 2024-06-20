@@ -88,21 +88,21 @@ export const useGetInifinityPopulareMovies = () => {
 
 export const useGetInifinityRecomendedMovies = (id: string) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.GET_RECOMENDED_MOVIES,id],
+    queryKey: [QUERY_KEYS.GET_RECOMENDED_MOVIES, id],
     queryFn: () => getMovieRecomendationById({ id: id }),
   });
 };
 
 export const useGetMovieById = ({ id }: { id: string }) => {
   return useQuery<MovieDetaile>({
-    queryKey: [QUERY_KEYS.GET_MOVIE_BY_ID,id],
+    queryKey: [QUERY_KEYS.GET_MOVIE_BY_ID, id],
     queryFn: () => getMovieById(id),
   });
 };
 
 export const useGetMovieReleaseDateById = ({ id }: { id: string }) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.GET_MOVIE_RELEASE_BY_ID,id],
+    queryKey: [QUERY_KEYS.GET_MOVIE_RELEASE_BY_ID, id],
     queryFn: () => getMovieRealeseDateById(id),
   });
 };
@@ -110,7 +110,7 @@ export const useGetMovieReleaseDateById = ({ id }: { id: string }) => {
 export const useGetMovieDirectorAndWriter = ({ id }: { id: string }) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return useQuery<any[] | undefined>({
-    queryKey: [QUERY_KEYS.GET_MOVIE_DIRECTOR_WRITER,id],
+    queryKey: [QUERY_KEYS.GET_MOVIE_DIRECTOR_WRITER, id],
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore: Unreachable code error
     queryFn: () => getMovieDirectorAndWriter(id),
@@ -119,21 +119,21 @@ export const useGetMovieDirectorAndWriter = ({ id }: { id: string }) => {
 
 export const useGetCreditByMovieId = ({ id }: { id: string }) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.GET_MOVIE_CREDITS_BY_ID,id],
+    queryKey: [QUERY_KEYS.GET_MOVIE_CREDITS_BY_ID, id],
     queryFn: () => getMovieCreditById(id),
   });
 };
 
 export const useGetImageByMovieId = ({ id }: { id: string }) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.GET_MOVIE_Image_BY_ID,id],
+    queryKey: [QUERY_KEYS.GET_MOVIE_Image_BY_ID, id],
     queryFn: () => getMovieImagesById(id),
   });
 };
 
 export const useGetVideoByMovieId = ({ id }: { id: string }) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.GET_MOVIE_VIDEO_BY_ID,id],
+    queryKey: [QUERY_KEYS.GET_MOVIE_VIDEO_BY_ID, id],
     queryFn: () => getMovieVideoById(id),
   });
 };
@@ -199,7 +199,7 @@ export const useGetInifinityUpComingMovies = () => {
 
 export const useGetMoviesByGenre = (id: string) => {
   return useInfiniteQuery<Page, Error>({
-    queryKey: [QUERY_KEYS.GET_MOVIES_BY_GENRE,id],
+    queryKey: [QUERY_KEYS.GET_MOVIES_BY_GENRE, id],
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore: Unreachable code error
     queryFn: ({ pageParam = 1 }: { pageParam: number }) => {
@@ -223,35 +223,35 @@ export const useGetMoviesByGenre = (id: string) => {
 //################################################## Series
 export const useGetSeriesById = ({ id }: { id: string }) => {
   return useQuery<SeriesDetaile>({
-    queryKey: [QUERY_KEYS.GET_SERIES_BY_ID,id],
+    queryKey: [QUERY_KEYS.GET_SERIES_BY_ID, id],
     queryFn: () => getSerieById(id),
   });
 };
 
 export const useGetSeriesCreditById = ({ id }: { id: string }) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.GET_SERIES_CREDIT_BY_ID,id ],
+    queryKey: [QUERY_KEYS.GET_SERIES_CREDIT_BY_ID, id],
     queryFn: () => getSeriesCreditById(id),
   });
 };
 
 export const useGetSeriesImageById = ({ id }: { id: string }) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.GET_SERIES_IMAGE_BY_ID,id],
+    queryKey: [QUERY_KEYS.GET_SERIES_IMAGE_BY_ID, id],
     queryFn: () => getSeriesImageById(id),
   });
 };
 
 export const useGetSeriesVideoById = ({ id }: { id: string }) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.GET_SERIES_VIDEO_BY_ID,id],
+    queryKey: [QUERY_KEYS.GET_SERIES_VIDEO_BY_ID, id],
     queryFn: () => getSeriesVideoById(id),
   });
 };
 
 export const useGetSeriesRecomended = (id: string) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.GET_SERIES_RECOMENDED_BY_ID,id],
+    queryKey: [QUERY_KEYS.GET_SERIES_RECOMENDED_BY_ID, id],
     queryFn: () => getSeriesRecomendationById({ id: id }),
   });
 };
@@ -338,7 +338,7 @@ export const useGetPopulareSeries = () => {
 
 export const useGetSeriesByGenre = (id: string) => {
   return useInfiniteQuery<Page, Error>({
-    queryKey: [QUERY_KEYS.GET_SERIES_BY_GENRE,id],
+    queryKey: [QUERY_KEYS.GET_SERIES_BY_GENRE, id],
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore: Unreachable code error
     queryFn: ({ pageParam = 1 }: { pageParam: number }) => {
@@ -374,8 +374,14 @@ export const useSignInAccount = () => {
 };
 
 export const useSignOutAccount = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: signOutAccount,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_CURRENT_USER],
+      });
+    },
   });
 };
 
@@ -392,7 +398,7 @@ export const useSaveMovie = () => {
       mediaId: string;
       imageUrl: string;
       mediaName: string;
-    }) => saveMovie(userId, mediaId, mediaName,imageUrl),
+    }) => saveMovie(userId, mediaId, mediaName, imageUrl),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_MOVIE_BY_ID],
@@ -422,11 +428,14 @@ export const useGetCurrentUser = () => {
 
 export const useGetSearchedMedia = (searchValue: string) => {
   return useInfiniteQuery<Page, Error>({
-    queryKey: [QUERY_KEYS.GET_SEARCHED_MEDIA,searchValue],
+    queryKey: [QUERY_KEYS.GET_SEARCHED_MEDIA, searchValue],
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore: Unreachable code error
     queryFn: ({ pageParam = 1 }: { pageParam: number }) => {
-      return getSerachedMedia({ searchValue: searchValue, pageParam: pageParam });
+      return getSerachedMedia({
+        searchValue: searchValue,
+        pageParam: pageParam,
+      });
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     getNextPageParam: (lastPage: Page) => {
