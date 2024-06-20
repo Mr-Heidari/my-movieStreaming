@@ -30,7 +30,7 @@ import Loader from "@/components/shared/Loader";
 
 const Loading = () => {
   return (
-    <div className="z-10 w-full flex flex-row gap-2 h-[500px]">
+    <div className="z-10 w-full flex flex-row gap-2 h-[250px] md:h-[500px]">
       <Skeleton className="md:w-[300px] max-md:w-[200px] max-sm:min-w-[110px] max-sm:w-[110px] h-full bg-neutral-600"></Skeleton>
       <div className="flex flex-col w-full gap-3 md:gap-6 justify-center">
         <Skeleton className=" w-[20%] h-4 bg-neutral-600"></Skeleton>
