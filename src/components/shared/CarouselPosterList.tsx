@@ -80,7 +80,7 @@ const CarouselPosterList = ({
                 (items.results !== undefined ? items.results : items).map(
                   (card: Media) => (
                     <SwiperSlide className="max-w-fit h-fit" key={card?.id}>
-                      <MediaCard mediaType={mediaType} card={card}></MediaCard>;
+                      <MediaCard mediaType={mediaType} card={card}></MediaCard>
                     </SwiperSlide>
                   )
                 )}

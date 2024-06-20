@@ -21,7 +21,7 @@ type props = {
 const MediaCard = ({ mediaType, card }: props) => {
   const { data: currentUser } = useGetCurrentUser();
 
-  const { user,isAuthenticated } = useUserContext();
+  const { user, isAuthenticated } = useUserContext();
 
   const [isSaved, setIsSaved] = useState(false);
 
@@ -105,7 +105,9 @@ const MediaCard = ({ mediaType, card }: props) => {
                           : "/assets/icons/save.svg"
                       }
                       alt=""
-                      className={` brightness-200  max-md:w-6 bg-black/70 max-md:p-1 md:p-[6px] rounded-full cursor-pointer ${!isAuthenticated && 'hidden'}`}
+                      className={` brightness-200  max-md:w-6 bg-black/70 max-md:p-1 md:p-[6px] rounded-full cursor-pointer ${
+                        !isAuthenticated && "hidden"
+                      }`}
                       onClick={(e) => handleSavePost(e)}
                     />
                   )}

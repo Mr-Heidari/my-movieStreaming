@@ -39,7 +39,7 @@
   scrollbar-width: none;  /* Firefox */
 }
   .top-contianer {
-    @apply flex flex-row  max-lg:gap-10 w-full px-[5%] justify-between h-20  items-center bg-zinc-900 fixed z-50 drop-shadow-[0_20px_30px_rgba(0,0,0,0.9)];
+    @apply flex flex-row  max-lg:gap-10 w-full px-[5%] justify-between md:h-20 h-16 items-center bg-zinc-900 fixed z-50 drop-shadow-[0_20px_30px_rgba(0,0,0,0.9)];
   }
   .topbar-links {
     @apply px-5 p-2  border-2 rounded-full text-sm text-white  transition font-semibold;
